@@ -1,20 +1,50 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Applications to review · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>.opp { padding:0; overflow:hidden; }
-.opp-h { display:flex; align-items:center; gap:16px; padding:18px 22px; border-bottom:1px solid var(--line); }
-.opp-h .sw { width:44px; height:44px; border-radius:12px; position:relative; overflow:hidden; flex:none; }
-.opp-h h3 { font-size:15.5px; }
-.opp .table td:first-child, .opp .table th:first-child { padding-left:22px; }
-.opp .table td:last-child, .opp .table th:last-child { padding-right:22px; }
+<title>Review queue · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>.stats { display:grid; grid-template-columns:repeat(4,1fr); padding:0; margin-bottom:20px; }
+.stats > div { padding:18px 22px; border-left:1px solid var(--line); }
+.stats > div:first-child { border-left:0; }
+.stats .n { font-family:var(--font-display); font-size:28px; font-weight:700; color:var(--ink); line-height:1.1; }
+.stats .n small { font-size:15px; color:var(--muted); font-weight:600; }
+.stats .l { font-size:12.5px; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:6px; }
+.stats .hint { font-size:11.5px; font-weight:600; margin-top:8px; }
+.split { display:flex; height:6px; border-radius:99px; overflow:hidden; margin-top:10px; background:#EEEFF2; }
+.split i { display:block; height:100%; }
+.opp { padding:0; overflow:hidden; }
+.opp-h { display:flex; align-items:center; gap:14px; padding:16px 20px; }
+.opp-h + .table { border-top:1px solid var(--line); }
+.opp-h .sw { width:40px; height:40px; border-radius:11px; position:relative; overflow:hidden; flex:none; }
+.opp-h h3 { font-size:15px; }
+.meta { display:flex; align-items:center; gap:8px; margin-top:4px; flex-wrap:wrap; }
+.cap { width:120px; flex:none; }
+.cap .row { font-size:12px; margin-bottom:5px; }
+.opp .table th, .opp .table td { padding-top:11px; padding-bottom:11px; }
+.opp .table td:first-child, .opp .table th:first-child { padding-left:20px; }
+.opp .table td:last-child, .opp .table th:last-child { padding-right:20px; }
 .opp .table th { border-radius:0 !important; white-space:nowrap; }
 .who { display:flex; align-items:center; gap:10px; }
 .who b { display:block; line-height:1.2; white-space:nowrap; }
 .who a:hover b { color:var(--red-600); }
-.who .small { white-space:nowrap; }
-.opp .table td:nth-child(2) { white-space:nowrap; }
-.msg { color:var(--muted); font-size:12.5px; max-width:300px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.acts { display:flex; gap:6px; justify-content:flex-end; white-space:nowrap; }
-.fail { display:flex; align-items:center; gap:8px; color:var(--red-600); font-size:12px; font-weight:600; }
-.opp-f { display:flex; align-items:center; justify-content:space-between; padding:12px 22px; background:#FCFCFD; border-top:1px solid var(--line); font-size:12.5px; }</style></head>
+.when { white-space:nowrap; color:var(--muted); font-size:12.5px; }
+.note { display:block; max-width:360px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--ink-2); font-size:12.5px; }
+.note.none { color:#B4B8C2; }
+.acts { display:flex; gap:6px; justify-content:flex-end; align-items:center; white-space:nowrap; }
+.ib { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--line); background:#fff; color:var(--muted); cursor:pointer; }
+.ib:hover { border-color:var(--red); color:var(--red); }
+.ib.yes { background:var(--ok); border-color:var(--ok); color:#fff; }
+.ib.yes:hover { filter:brightness(.92); color:#fff; }
+.opp-f { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:#FCFCFD; border-top:1px solid var(--line); font-size:12.5px; }
+.att { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.att:last-child { border-bottom:0; padding-bottom:0; }
+.att .d { width:8px; height:8px; border-radius:50%; flex:none; }
+.att b { color:var(--ink); flex:1; }
+.donut { width:96px; height:96px; border-radius:50%; background:conic-gradient(var(--ok) 0 81%, var(--red) 81% 100%); display:grid; place-items:center; flex:none; }
+.donut span { width:68px; height:68px; border-radius:50%; background:#fff; display:grid; place-items:center; text-align:center; line-height:1.1; }
+.donut b { font-family:var(--font-display); font-size:20px; color:var(--ink); }
+.lg { display:flex; align-items:center; gap:8px; font-size:12.5px; }
+.lg i { width:8px; height:8px; border-radius:2px; }
+.lg b { margin-left:auto; color:var(--ink); }
+.tb { display:grid; grid-template-columns:96px 1fr 24px; align-items:center; gap:10px; font-size:12.5px; margin-top:10px; }
+.tb b { text-align:right; color:var(--ink); }
+@media (max-width:900px){ .stats{grid-template-columns:repeat(2,1fr)} .stats > div:nth-child(3){border-left:0} .stats > div:nth-child(n+3){border-top:1px solid var(--line)} .layout{grid-template-columns:1fr !important} .note{max-width:140px} .cap{display:none} }</style></head>
 <body><div class="utility"><div class="wrap">
   <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
   <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
@@ -29,61 +59,66 @@
     <a class="me" href="40-affairs-review.html"><span class="avatar sm alt2">SH</span><span><b>Sally</b><span>IPO coordinator</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
   </div></div></header>
 <main class="page"><div class="wrap">
-<div class="pagehead"><div><span class="eyebrow">Student Affairs</span><h1 style="margin-top:6px">Applications to review</h1><p class="row" style="gap:8px">Who has applied, and what still needs a decision. <span class="badge info">5 opportunities you run</span></p></div><div class="row"><div class="seg"><a>Term</a><a class="on">Fall 2026</a></div><a class="btn btn-primary" href="39-affairs-post.html"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Post an opportunity</a></div></div>
+<div class="pagehead"><div><span class="eyebrow">Student Affairs</span><h1 style="margin-top:6px">Review queue</h1></div><div class="row"><div class="seg"><a>Term</a><a class="on">Fall 2026</a></div><a class="btn btn-primary" href="39-affairs-post.html"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Post</a></div></div>
 
- <div class="grid g4" style="margin-bottom:24px">
-  <div class="kpi"><span class="ico o"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><div class="lbl">Waiting for a decision</div><div class="val">14 <small>applications</small></div><span class="delta down">3 opened more than 3 days ago</span></div></div>
-  <div class="kpi"><span class="ico "><svg class="i " viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span><div><div class="lbl">Approved, not yet in Moodle</div><div class="val">2</div></div></div>
-  <div class="kpi"><span class="ico g"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg></span><div><div class="lbl">Decided this term</div><div class="val">63 <small>· 51 approved</small></div></div></div>
-  <div class="kpi"><span class="ico v"><svg class="i " viewBox="0 0 24 24"><path d="M4 21V4M4 4h12l-2 4 2 4H4"/></svg></span><div><div class="lbl">Open opportunities</div><div class="val">4 <small>of 5</small></div></div></div>
+ <div class="card stats">
+  <div><div class="n">14</div><div class="l">Waiting</div><div class="hint" style="color:var(--red-600)">3 over 3 days</div></div>
+  <div><div class="n">2</div><div class="l">Not in Moodle</div><div class="hint" style="color:#9A6200">1 failed</div></div>
+  <div><div class="n">63</div><div class="l">Decided</div><div class="split"><i style="width:81%;background:var(--ok)"></i><i style="width:19%;background:var(--red)"></i></div></div>
+  <div><div class="n">4<small> / 5</small></div><div class="l">Open</div><div class="split"><i style="width:80%;background:var(--violet)"></i></div></div>
  </div>
 
- <div class="card" style="padding:0 8px;margin-bottom:24px"><div class="row between"><nav class="tabs" style="border:0"><a class="on">Waiting <span class="badge red">14</span></a><a>Approved, not in Moodle <span class="badge">2</span></a><a>Decided <span class="badge">63</span></a></nav><div class="row" style="gap:8px;padding-right:12px"><a class="chip on">All types</a><a class="chip">Volunteering</a><a class="chip">Clubs</a><a class="chip">International</a><a class="chip">Sports</a></div></div></div>
+ <div class="card" style="padding:0 8px;margin-bottom:20px"><div class="row between"><nav class="tabs" style="border:0"><a class="on">Waiting <span class="badge red">14</span></a><a>Not in Moodle <span class="badge">2</span></a><a>Decided <span class="badge">63</span></a></nav><div class="row" style="gap:8px;padding-right:12px"><a class="chip on">All</a><a class="chip">Volunteering</a><a class="chip">Clubs</a><a class="chip">International</a><a class="chip">Sports</a></div></div></div>
 
- <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
+ <div class="layout" style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start">
   <section class="stack">
 
    <article class="card opp">
-    <div class="opp-h"><span class="sw cv2"><span class="pattern"></span></span><div style="flex:1;min-width:0"><div class="row" style="gap:8px;margin-bottom:3px"><span class="badge red">VOLUNTEERING</span><span class="badge ok">Open</span><span class="badge warn">Closes Sat 17 Oct</span></div><h3>Takaful Team — Winter food drive</h3><div class="small muted">Takaful Team · Moodle course TAK-WFD-F26 · 26 of 40 places taken</div></div><div style="width:150px"><div class="row between small" style="margin-bottom:6px"><span class="muted">Places</span><b style="color:var(--ink)">26 / 40</b></div><div class="bar"><i style="width:65%"></i></div></div></div>
-    <table class="table">
-     <tr><th>Student</th><th>Applied</th><th>Why they want to join</th><th>Status</th><th style="text-align:right">Decision</th></tr>
-     <tr><td><div class="who"><span class="avatar sm">LH</span><div><a href="41-affairs-applicant.html"><b>Layla Haddad</b></a><span class="small muted">2023-0412 · Software Eng. · Y3</span></div></div></td><td>Today, 9:12 AM</td><td><span class="msg">I volunteered with Takaful last spring and want to help lead a delivery route this winter.</span></td><td><span class="badge warn">Waiting</span></td><td><div class="acts"><a class="btn btn-sm btn-ghost">Reject</a><a class="btn btn-sm btn-primary">Approve</a></div></td></tr>
-     <tr><td><div class="who"><span class="avatar sm alt">OM</span><div><a href="41-affairs-applicant.html"><b>Omar Masri</b></a><span class="small muted">2024-0187 · Electrical Eng. · Y2</span></div></div></td><td>Yesterday</td><td><span class="msg muted" style="font-style:italic">No message</span></td><td><span class="badge warn">Waiting</span></td><td><div class="acts"><a class="btn btn-sm btn-ghost">Reject</a><a class="btn btn-sm btn-primary">Approve</a></div></td></tr>
-     <tr><td><div class="who"><span class="avatar sm alt3">NZ</span><div><a href="41-affairs-applicant.html"><b>Nour Zahran</b></a><span class="small muted">2022-0951 · Data Science · Y4</span></div></div></td><td>Mon 12 Oct</td><td><span class="msg">I can drive one of the vans on two of the four Saturdays.</span></td><td><span class="badge warn">Waiting</span></td><td><div class="acts"><a class="btn btn-sm btn-ghost">Reject</a><a class="btn btn-sm btn-primary">Approve</a></div></td></tr>
-     <tr><td><div class="who"><span class="avatar sm alt2">SM</span><div><a href="41-affairs-applicant.html"><b>Sara Mansour</b></a><span class="small muted">2025-0033 · Cyber Security · Y1</span></div></div></td><td>Sun 11 Oct</td><td><span class="msg">First year, would love to meet people and give back.</span></td><td><span class="badge warn">Waiting</span></td><td><div class="acts"><a class="btn btn-sm btn-ghost">Reject</a><a class="btn btn-sm btn-primary">Approve</a></div></td></tr>
+    <div class="opp-h"><span class="sw cv2"><span class="pattern"></span></span><div style="flex:1;min-width:0"><h3>Takaful — Winter food drive</h3><div class="meta"><span class="badge red">Volunteering</span><span class="badge warn">Closes Sat 17 Oct</span></div></div><div class="cap"><div class="row between"><span class="muted">Places</span><b style="color:var(--ink)">26/40</b></div><div class="bar thin"><i style="width:65%"></i></div></div></div>
+    <table class="table"><tr><th>Student</th><th>Applied</th><th>Note</th><th style="text-align:right">Decision</th></tr>
+     <tr><td><div class="who"><span class="avatar sm ">LH</span><div><a href="41-affairs-applicant.html"><b>Layla Haddad</b></a><span class="small muted">Software Eng. · Y3</span></div></div></td><td class="when">Today</td><td><span class="note" title="Volunteered last spring, wants to lead a route.">Volunteered last spring, wants to lead a route.</span></td><td><div class="acts"><a class="ib" title="Reject"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></a><a class="ib yes" title="Approve"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></a></div></td></tr>
+     <tr><td><div class="who"><span class="avatar sm alt">OM</span><div><a href="41-affairs-applicant.html"><b>Omar Masri</b></a><span class="small muted">Electrical Eng. · Y2</span></div></div></td><td class="when">Yesterday</td><td><span class="note none">—</span></td><td><div class="acts"><a class="ib" title="Reject"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></a><a class="ib yes" title="Approve"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></a></div></td></tr>
+     <tr><td><div class="who"><span class="avatar sm alt3">NZ</span><div><a href="41-affairs-applicant.html"><b>Nour Zahran</b></a><span class="small muted">Data Science · Y4</span></div></div></td><td class="when">12 Oct</td><td><span class="note" title="Can drive a van on two Saturdays.">Can drive a van on two Saturdays.</span></td><td><div class="acts"><a class="ib" title="Reject"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></a><a class="ib yes" title="Approve"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></a></div></td></tr>
+     <tr><td><div class="who"><span class="avatar sm alt2">SM</span><div><a href="41-affairs-applicant.html"><b>Sara Mansour</b></a><span class="small muted">Cyber Security · Y1</span></div></div></td><td class="when">11 Oct</td><td><span class="note" title="First year, wants to give back.">First year, wants to give back.</span></td><td><div class="acts"><a class="ib" title="Reject"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></a><a class="ib yes" title="Approve"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></a></div></td></tr>
     </table>
-    <div class="opp-f"><span class="muted">4 of 6 waiting shown · 26 decided</span><a class="link">Show all applicants <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="opp-f"><span class="muted">+2 waiting</span><a class="link">View all <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
    </article>
 
    <article class="card opp">
-    <div class="opp-h"><span class="sw cv7"><span class="pattern"></span></span><div style="flex:1;min-width:0"><div class="row" style="gap:8px;margin-bottom:3px"><span class="badge">CLUB</span><span class="badge ok">Open</span></div><h3>Cyber Security Club — CTF squad</h3><div class="small muted">Cyber Security Club · Moodle course CSC-CTF-F26 · no place limit</div></div></div>
-    <table class="table">
-     <tr><th>Student</th><th>Applied</th><th>Why they want to join</th><th>Status</th><th style="text-align:right">Decision</th></tr>
-     <tr><td><div class="who"><span class="avatar sm alt">YA</span><div><a href="41-affairs-applicant.html"><b>Yousef Ali</b></a><span class="small muted">2024-0566 · Computer Science · Y2</span></div></div></td><td>Thu 8 Oct</td><td><span class="msg">Placed top 20 in picoCTF 2026; want a team for JOSA CTF.</span></td><td><span class="badge info">Approved</span></td><td><div class="acts"><span class="fail"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>The enrolment did not go through</span><a class="btn btn-sm btn-soft">Try enrolling again</a></div></td></tr>
-     <tr><td><div class="who"><span class="avatar sm alt3">DS</span><div><a href="41-affairs-applicant.html"><b>Dana Saleh</b></a><span class="small muted">2023-0278 · Software Eng. · Y3</span></div></div></td><td>Wed 7 Oct</td><td><span class="msg">Interested in web exploitation and forensics.</span></td><td><span class="badge info">Approved</span></td><td><div class="acts"><span class="small muted" style="align-self:center">Not in Moodle yet</span><a class="btn btn-sm btn-primary">Enrol in Moodle</a></div></td></tr>
-     <tr><td><div class="who"><span class="avatar sm alt2">KT</span><div><a href="41-affairs-applicant.html"><b>Khaled Tamimi</b></a><span class="small muted">2025-0410 · Cyber Security · Y1</span></div></div></td><td>Tue 13 Oct</td><td><span class="msg">Complete beginner but keen to learn Linux and networking.</span></td><td><span class="badge warn">Waiting</span></td><td><div class="acts"><a class="btn btn-sm btn-ghost">Reject</a><a class="btn btn-sm btn-primary">Approve</a></div></td></tr>
+    <div class="opp-h"><span class="sw cv7"><span class="pattern"></span></span><div style="flex:1;min-width:0"><h3>Cyber Security Club — CTF squad</h3><div class="meta"><span class="badge">Club</span><span class="badge ok">Open</span></div></div><div class="cap"><div class="row between"><span class="muted">Places</span><b style="color:var(--ink)">No limit</b></div></div></div>
+    <table class="table"><tr><th>Student</th><th>Applied</th><th>Note</th><th style="text-align:right">Decision</th></tr>
+     <tr><td><div class="who"><span class="avatar sm alt">YA</span><div><a href="41-affairs-applicant.html"><b>Yousef Ali</b></a><span class="small muted">Computer Science · Y2</span></div></div></td><td class="when">8 Oct</td><td><span class="note" title="Top 20 in picoCTF 2026.">Top 20 in picoCTF 2026.</span></td><td><div class="acts"><span class="badge red">Enrol failed</span><a class="btn btn-sm btn-soft">Retry</a></div></td></tr>
+     <tr><td><div class="who"><span class="avatar sm alt3">DS</span><div><a href="41-affairs-applicant.html"><b>Dana Saleh</b></a><span class="small muted">Software Eng. · Y3</span></div></div></td><td class="when">7 Oct</td><td><span class="note" title="Web exploitation and forensics.">Web exploitation and forensics.</span></td><td><div class="acts"><span class="badge info">Approved</span><a class="btn btn-sm btn-primary">Enrol</a></div></td></tr>
+     <tr><td><div class="who"><span class="avatar sm alt2">KT</span><div><a href="41-affairs-applicant.html"><b>Khaled Tamimi</b></a><span class="small muted">Cyber Security · Y1</span></div></div></td><td class="when">13 Oct</td><td><span class="note" title="Beginner, keen to learn Linux.">Beginner, keen to learn Linux.</span></td><td><div class="acts"><a class="ib" title="Reject"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></a><a class="ib yes" title="Approve"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></a></div></td></tr>
     </table>
-    <div class="opp-f"><span class="muted">1 waiting · 2 approved, not yet in Moodle · 6 in Moodle</span><a class="link">Show all applicants <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="opp-f"><span class="muted">6 enrolled</span><a class="link">View all <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
    </article>
 
    <article class="card opp">
-    <div class="opp-h"><span class="sw cv6"><span class="pattern"></span></span><div style="flex:1;min-width:0"><div class="row" style="gap:8px;margin-bottom:3px"><span class="badge info">INTERNATIONAL</span><span class="badge ok">Open</span><span class="badge red">Closes tomorrow</span></div><h3>Erasmus+ exchange — Spring 2027</h3><div class="small muted">Office of International Relations · Moodle course ERA-S27 · 21 applications for 6 places</div></div><a class="btn btn-sm btn-ghost">Open 7 waiting <svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a></div>
+    <div class="opp-h"><span class="sw cv6"><span class="pattern"></span></span><div style="flex:1;min-width:0"><h3>Erasmus+ exchange — Spring 2027</h3><div class="meta"><span class="badge info">International</span><span class="badge red">Closes tomorrow</span></div></div><div class="cap"><div class="row between"><span class="muted">Applied</span><b style="color:var(--ink)">21 for 6</b></div><div class="bar thin"><i style="width:100%"></i></div></div><a class="btn btn-sm btn-ghost">Review 7</a></div>
    </article>
 
    <article class="card opp">
-    <div class="opp-h"><span class="sw cv4"><span class="pattern"></span></span><div style="flex:1;min-width:0"><div class="row" style="gap:8px;margin-bottom:3px"><span class="badge ok">SPORTS</span><span class="badge">Draft</span></div><h3>HTU Football — tryouts</h3><div class="small muted">Sports office · No course yet · not visible to students</div></div><span class="small muted">No applications yet</span></div>
+    <div class="opp-h"><span class="sw cv4"><span class="pattern"></span></span><div style="flex:1;min-width:0"><h3>HTU Football — tryouts</h3><div class="meta"><span class="badge ok">Sports</span><span class="badge">Draft</span></div></div><a class="btn btn-sm btn-ghost">Attach course</a></div>
    </article>
   </section>
 
   <aside class="stack">
-   <div class="card"><div class="card-h"><h3>How a decision works</h3></div>
-    <div class="tl"><div class="ev done"><b style="font-size:13px;color:var(--ink)">Approve</b><div class="small muted">The student is enrolled in the opportunity's Moodle course and told by notification.</div></div><div class="ev"><b style="font-size:13px;color:var(--ink)">If Moodle refuses</b><div class="small muted">The approval stands and the row stays under “Approved, not in Moodle” until you try again.</div></div><div class="ev todo" style="padding-bottom:0"><b style="font-size:13px;color:var(--ink)">Reject</b><div class="small muted">The student sees the decision on their Student Affairs page. Nothing is added to their record.</div></div></div></div>
-   <div class="card"><div class="card-h"><h3>Needs attention</h3></div>
-    <div class="row" style="padding:10px 0;border-bottom:1px solid var(--line)"><span class="kpi" style="padding:0;border:0;box-shadow:none"><span class="ico " style="width:38px;height:38px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span></span><span style="flex:1;font-size:13px"><b style="color:var(--ink)">1 enrolment failed</b><div class="small muted">Cyber Security Club</div></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
-    <div class="row" style="padding:10px 0;border-bottom:1px solid var(--line)"><span class="kpi" style="padding:0;border:0;box-shadow:none"><span class="ico o" style="width:38px;height:38px"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></span><span style="flex:1;font-size:13px"><b style="color:var(--ink)">Erasmus+ closes tomorrow</b><div class="small muted">7 still waiting</div></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
-    <div class="row" style="padding:10px 0"><span class="kpi" style="padding:0;border:0;box-shadow:none"><span class="ico b" style="width:38px;height:38px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></span></span><span style="flex:1;font-size:13px"><b style="color:var(--ink)">Football tryouts is a draft</b><div class="small muted">Attach a course to publish</div></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+   <div class="card"><div class="card-h" style="margin-bottom:6px"><h3>Needs attention</h3></div>
+    <div class="att"><span class="d" style="background:var(--red)"></span><b>Enrolment failed</b><span class="small muted">CTF</span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+    <div class="att"><span class="d" style="background:var(--warn)"></span><b>Erasmus+ closes tomorrow</b><span class="small muted">7</span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+    <div class="att"><span class="d" style="background:var(--info)"></span><b>Football is a draft</b><svg class="i i-sm" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
    </div>
-   <div class="card tint"><b style="color:var(--ink);font-size:13px">Only your opportunities</b><p class="small muted" style="margin-top:4px">You see applicants for what you posted or were added to. A student's warnings and GPA open only from their profile.</p></div>
+   <div class="card"><div class="card-h"><h3>Decisions</h3><span class="small muted">Fall 2026</span></div>
+    <div class="row" style="gap:18px"><div class="donut"><span><b>81%</b></span></div>
+     <div style="flex:1" class="stack"><div class="lg"><i style="background:var(--ok)"></i>Approved<b>51</b></div><div class="lg"><i style="background:var(--red)"></i>Rejected<b>12</b></div></div></div>
+   </div>
+   <div class="card"><div class="card-h" style="margin-bottom:6px"><h3>Waiting by type</h3></div>
+    <div class="tb"><span>International</span><div class="bar thin"><i style="width:100%"></i></div><b>7</b></div>
+    <div class="tb"><span>Volunteering</span><div class="bar thin"><i style="width:86%"></i></div><b>6</b></div>
+    <div class="tb"><span>Clubs</span><div class="bar thin"><i style="width:14%"></i></div><b>1</b></div>
+    <div class="tb"><span>Sports</span><div class="bar thin"><i style="width:0"></i></div><b>0</b></div>
+   </div>
   </aside>
  </div>
 </div></main><footer class="footer"><div class="wrap">
