@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account pending · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>
+.input input { border: 0; outline: none; background: none; font: inherit; color: var(--ink); flex: 1; min-width: 0; }
+.demo-roles { margin-top: 26px; padding-top: 22px; border-top: 1px dashed var(--line); }
+.demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.demo { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.demo:hover { border-color: var(--red); box-shadow: 0 6px 16px rgba(232,52,63,.14); transform: translateY(-2px); }
+.demo.on { border-color: var(--red); background: var(--red-50, #fdeeee); }
+.demo .avatar { width: 32px; height: 32px; font-size: 11px; flex: none; }
+.demo b { display: block; font-size: 12.5px; color: var(--ink); line-height: 1.2; }
+.demo small { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.demo > span:last-child { min-width: 0; }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var homes = {}; document.querySelectorAll('.demo').forEach(function (d) { homes[d.dataset.user] = d.getAttribute('href'); });
+  var user = document.getElementById('login-user'), go = document.getElementById('login-go');
+  function sync() {
+    var u = user.value.trim().toLowerCase().replace(/@htu\.edu\.jo$/, '');
+    go.setAttribute('href', homes[u] || '02-student-dashboard.html');
+    document.querySelectorAll('.demo').forEach(function (d) { d.classList.toggle('on', d.dataset.user === u); });
+  }
+  user.addEventListener('input', sync); sync();
+  document.querySelectorAll('.input input').forEach(function (i) { i.addEventListener('keydown', function (e) { if (e.key === 'Enter') location.href = go.getAttribute('href'); }); });
+  var eye = document.getElementById('login-pass').parentElement.querySelector('.muted');
+  if (eye) { eye.style.cursor = 'pointer'; eye.addEventListener('click', function () { var p = document.getElementById('login-pass'); p.type = p.type === 'password' ? 'text' : 'password'; }); }
+});
+</script><style>
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:12.5px; }
+.pend-ico { width:56px; height:56px; border-radius:16px; background:var(--warn-50); color:var(--warn); display:grid; place-items:center; }
+.pend-ico .i { width:26px; height:26px; }
+.statusline { display:flex; gap:10px; align-items:flex-start; background:var(--canvas); border-radius:12px; padding:12px 14px; font-size:13px; color:var(--ink-2); }
+.tl .ev b { color:var(--ink); font-size:13.5px; display:block; }
+.tl .ev span { font-size:12px; color:var(--muted); }
+.tl .ev.wait::before { border-color:var(--warn); background:var(--warn-50); }
+.mini { padding:16px 18px; }
+.mini b { color:var(--ink); font-size:13px; }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div>
+<main style="background:linear-gradient(180deg,#fff, #F7F7F9)">
+ <div class="wrap" style="padding:40px 0 64px">
+  <div style="display:flex;justify-content:center;margin-bottom:34px"><img src="../assets/htu-wordmark.png" style="height:58px" alt="HTU"></div>
+  <div style="display:grid;grid-template-columns:1.15fr .85fr;max-width:1060px;margin:0 auto;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);background:#fff">
+   <div style="padding:52px 60px">
+    <div class="row" style="gap:16px;margin-bottom:22px"><span class="pend-ico"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="badge warn" style="padding:5px 11px">Pending approval</span></div>
+    <span class="eyebrow">HTU eLearning</span>
+    <h1 style="font-size:32px;margin:10px 0 12px">Your account is being set up</h1>
+    <p style="font-size:15px;line-height:1.65">Hi Yousef Nasser. Your account was created, but nobody has granted you a role yet — so there is nothing to show you here.</p>
+    <p class="muted" style="margin-top:10px;line-height:1.6">An administrator needs to assign you a role before you can continue. Once you have been told that happened, use “Check again” — no need to sign out.</p>
+
+    <div class="statusline" style="margin-top:22px"><svg class="i i-sm" viewBox="0 0 24 24" style="margin-top:2px;color:var(--muted)"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>No role yet. An administrator has not granted one — check again in a moment. <span class="muted">Last checked 09:14</span></span></div>
+
+    <div class="row" style="margin-top:24px"><a class="btn btn-primary btn-lg"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3v5h-5"/></svg> Check again</a><a href="01-login.html" class="btn btn-ghost btn-lg"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg> Sign out</a></div>
+
+    <div class="row between" style="margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px"><span class="row small muted" style="gap:8px"><span class="avatar xs alt">YN</span><span>Signed in as <span class="mono" style="color:var(--ink)">yousef.nasser</span> · Moodle user 5128</span></span></div>
+   </div>
+   <div style="background:var(--canvas);padding:52px 44px;border-left:1px solid var(--line)">
+    <h3 style="margin-bottom:6px">Where you are</h3>
+    <p class="small muted" style="margin-bottom:22px">Three steps — two are done.</p>
+    <div class="tl">
+     <div class="ev done"><b>Account created in Moodle</b><span>Mon 12 Oct 2026 · 14:05</span></div>
+     <div class="ev done"><b>Signed in to HTU eLearning</b><span>Today · 09:12</span></div>
+     <div class="ev wait"><b>Role assigned by an administrator</b><span>Waiting — Student or Teacher, with a first course</span></div>
+     <div class="ev todo" style="padding-bottom:0"><b style="color:var(--muted)">Your home opens</b><span>Your courses, grades and SARAH appear here</span></div>
+    </div>
+    <div class="card" style="margin-top:26px;padding:18px">
+     <b style="color:var(--ink);font-size:13.5px">Waiting longer than a working day?</b>
+     <p class="small muted" style="margin:4px 0 10px">The eLearning team can see accounts awaiting a role and assign yours.</p>
+     <div class="stack" style="gap:6px;font-size:13px"><span class="row" style="gap:8px"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span class="row" style="gap:8px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</span></div>
+    </div>
+   </div>
+  </div>
+
+  <div style="max-width:1060px;margin:40px auto 0">
+   <div class="row between" style="margin-bottom:14px"><span class="eyebrow" style="color:var(--muted)">Other states of this screen</span></div>
+   <div class="grid g3">
+    <div class="card mini"><div class="row" style="gap:10px;margin-bottom:8px"><span class="btn btn-primary btn-sm" style="opacity:.6;pointer-events:none">Checking…</span></div><b>Checking</b><p class="small muted">The button is disabled while Moodle is asked again.</p></div>
+    <div class="card mini"><div class="row" style="gap:8px;margin-bottom:8px;color:var(--ok)"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg><span class="small" style="font-weight:600">Role found</span></div><b>Role granted</b><p class="small muted">The page moves straight to the student or teacher home — no sign-out needed.</p></div>
+    <div class="card mini"><div class="row" style="gap:8px;margin-bottom:8px;color:var(--warn)"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg><span class="small" style="font-weight:600">Could not check</span></div><b>Could not check just now.</b><p class="small muted">Try again shortly. This is about the connection, not your account.</p></div>
+   </div>
+  </div>
+ </div>
+</main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

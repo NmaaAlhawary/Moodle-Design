@@ -1,0 +1,172 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grades · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.gsec-h { display:flex; align-items:baseline; gap:12px; margin:6px 0 12px; }
+.gsec-h .count { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; color:var(--muted); }
+.gc { padding:0; overflow:hidden; }
+.gc-head { display:flex; align-items:center; gap:18px; padding:15px 20px; cursor:pointer; }
+.gc-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:11.5px; font-weight:600; background:var(--canvas); color:var(--ink); padding:3px 8px; border-radius:6px; white-space:nowrap; }
+.gc-id { flex:1; min-width:0; }
+.gc-id h3 { font-size:15px; margin:4px 0 5px; }
+.gc-foot { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); flex-wrap:wrap; }
+.gc-mark { text-align:right; min-width:130px; }
+.gc-mark b { display:block; font-family:var(--font-display); font-size:22px; color:var(--ink); line-height:1.1; }
+.gc-mark span { font-size:11.5px; color:var(--muted); }
+.gc-mark .faint { display:block; font-size:14px; color:var(--muted); font-style:italic; }
+.gc-chev { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; color:var(--muted); border:1px solid var(--line); flex:none; }
+.gc.open .gc-chev { background:var(--red-50); color:var(--red); border-color:var(--red-100); }
+.gc.open { border-color:#DADCE2; box-shadow:var(--shadow); }
+.gc-panel { border-top:1px solid var(--line); padding:14px 20px 18px; background:#FCFCFD; }
+.gc-panel .table td { padding:11px 12px; background:transparent; }
+.gc-panel .table td.num, .gc-panel .table th.num { text-align:right; }
+.sub { font-size:12px; color:var(--muted); margin-top:2px; }
+.mk { font-family:var(--font-display); font-weight:600; color:var(--ink); }
+.mk small { color:var(--muted); font-weight:500; font-family:var(--font-body); }
+.flagdot { width:10px; height:10px; border-radius:50%; background:var(--warn); box-shadow:0 0 0 4px var(--warn-50); flex:none; }
+.livedot { width:7px; height:7px; border-radius:50%; background:currentColor; box-shadow:0 0 0 3px rgba(30,158,98,.18); }
+.legend { display:grid; grid-template-columns:110px 1fr; gap:9px 10px; align-items:start; font-size:12.5px; }
+.legend .badge { justify-self:start; }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
+  <button class="iconbtn navtoggle" aria-label="Menu" data-toggle-nav><svg class="i " viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="02-student-dashboard.html"><img src="../assets/htu-wordmark.png" alt="HTU"><div class="sub"><b>eLearning</b></div></a>
+  <nav class="mainnav"><a href="02-student-dashboard.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a><a href="03-my-courses.html" class="on"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg>My courses</a><a href="05-student-affairs.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg>Student Affairs</a><a href="10-ipo-journey.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/></svg>My IPO Journey</a></nav>
+  <div class="mast-actions">
+    
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></span>
+    <a class="me" href="06-profile-general-info.html"><span class="avatar sm ">LH</span><span><b>Layla</b><span>Student</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div></div></header>
+<div class="sectionbar"><div class="wrap"><span class="home"><svg class="i " viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><div class="crumbs">Home <span>/</span> My courses <span>/</span> <b>Grades</b></div><div class="spacer"></div><nav style="justify-content:flex-end"><a href="03-my-courses.html" class="">Courses</a><a class="on">Grades</a><a class="">Archive</a></nav></div></div>
+<main class="page"><div class="wrap">
+ <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
+  <div class="stack" style="gap:22px">
+   <div class="pagehead" style="margin:0">
+    <div><span class="eyebrow">Academic record · Fall 2026</span><h1 style="margin-top:6px">Grades</h1><p>Read live from Moodle, as you — never from a copy. Grouped the way the portal is: Courses, Student Affairs, IPO &amp; Apprenticeship.</p></div>
+    <div class="row" style="flex:none"><span class="badge ok" style="padding:6px 11px"><span class="livedot"></span> Live from Moodle · read 2 min ago</span><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3v5h-5"/></svg> Refresh</a></div>
+   </div>
+
+   <section class="grid g4">
+    <div class="kpi"><span class="ico"><svg class="i " viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg></span><div><div class="lbl">Courses on record</div><div class="val">8</div><div class="small muted">across 3 sections</div></div></div>
+    <div class="kpi"><span class="ico g"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg></span><div><div class="lbl">Assessments marked</div><div class="val">24 <small>of 36</small></div><div class="small muted">a count, not an average</div></div></div>
+    <div class="kpi"><span class="ico o"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><div class="lbl">In review</div><div class="val">2</div><div class="small muted">awaiting marking</div></div></div>
+    <div class="kpi"><span class="ico v"><svg class="i " viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></span><div><div class="lbl">Not submitted</div><div class="val">1</div><div class="small muted">Lab report 3 · due Thu</div></div></div>
+   </section>
+
+   <!-- COURSES -->
+   <section>
+    <div class="gsec-h"><h2>Courses</h2><span class="count">7 courses</span><span class="spacer"></span><span class="small muted">Each total is Moodle's own — this page never averages them.</span></div>
+    <div class="stack" style="gap:12px">
+
+     <div class="card gc open">
+      <div class="gc-head">
+       <div class="gc-id"><span class="gc-code">EM-210</span><h3>Electrical Machines</h3>
+        <div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>6 of 8 assessments marked</span><span>·</span><span>Dr. Omar Mansour</span></div></div>
+       <div class="gc-mark"><b>84.00 %</b><span>Course total · Moodle</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></span>
+      </div>
+      <div class="gc-panel">
+       <div class="row between" style="margin-bottom:10px"><a class="btn btn-ghost btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Open the Moodle grade report</a><span class="small muted">Weights and marks exactly as Moodle reports them</span></div>
+       <table class="table">
+        <tr><th>Item</th><th class="num" style="width:80px">Weight</th><th class="num" style="width:130px">Mark</th><th style="width:200px">Status</th></tr>
+        <tr><td><b>Quiz 1 — Magnetic circuits</b></td><td class="num">5%</td><td class="num"><span class="mk">9.00 <small>/ 10</small></span></td><td><span class="badge ok">Graded</span></td></tr>
+        <tr><td><b>Quiz 2 — DC machines</b><div class="sub">“Good working — check your units in Q3.” · Dr. Omar Mansour</div></td><td class="num">5%</td><td class="num"><span class="mk">7.50 <small>/ 10</small></span></td><td><span class="badge ok">Graded</span></td></tr>
+        <tr><td><b>Quiz 3 — DC motors</b></td><td class="num">5%</td><td class="num"><span class="mk">8.50 <small>/ 10</small></span></td><td><span class="badge ok">Graded</span></td></tr>
+        <tr><td><b>Pre-lab check 2</b><div class="sub">Answered after the lab had started — recorded as 0 per the lab policy.</div></td><td class="num">2%</td><td class="num"><span class="mk">0.00 <small>/ 5</small></span></td><td><span class="badge ok">Graded</span> <span class="small muted">real zero</span></td></tr>
+        <tr><td><b>Lab report 1 — Transformer equivalent circuit</b></td><td class="num">10%</td><td class="num"><span class="mk">17.00 <small>/ 20</small></span></td><td><span class="badge ok">Graded</span> <span class="badge info">Set by teacher</span></td></tr>
+        <tr><td><b>Lab report 3 — Induction motors</b><div class="sub">Due Thu 15 Oct · 23:59</div></td><td class="num">10%</td><td class="num"><span class="muted small">Not submitted</span></td><td><span class="badge">Not submitted</span></td></tr>
+        <tr><td><b>Midterm exam</b><div class="sub">Hidden from you in Moodle, so its value is withheld — this is not a zero.</div></td><td class="num">25%</td><td class="num"><span class="muted small">Hidden until released</span></td><td><span class="badge">Withheld</span></td></tr>
+        <tr><td><b>Attendance</b></td><td class="num"><span class="muted" title="Weight not reported">—</span></td><td class="num"><span class="mk">10.00 <small>/ 10</small></span></td><td><span class="badge ok">Graded</span></td></tr>
+       </table>
+      </div>
+     </div>
+
+     <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">CS-201</span><h3>Data Structures</h3><div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>3 of 6 assessments marked</span><span>·</span><span class="badge warn">1 in review</span></div></div>
+       <div class="gc-mark"><b>76.50 %</b><span>Course total · Moodle</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+
+     <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">ECD-110</span><h3>Electronic Circuits and Devices</h3><div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>4 of 5 assessments marked</span></div></div>
+       <div class="gc-mark"><b>91.20 %</b><span>Course total · Moodle</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+
+     <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">DB-101</span><h3>Database Systems</h3><div class="gc-foot"><span class="badge warn"><span class="livedot" style="box-shadow:none"></span> From the mirror</span><span>7 of 7 assessments marked</span><span>·</span><span style="color:#9A6200">May be out of date — mirrored 3 h ago</span></div></div>
+       <span class="flagdot" title="Something in this course could not be shown — open it to read why."></span>
+       <div class="gc-mark"><b>88.00 %</b><span>Course total · Moodle</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+
+     <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">EEP-120</span><h3>Electrical &amp; Electronic Principles</h3><div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>2 of 5 assessments marked</span><span>·</span><span class="badge warn">1 in review</span></div></div>
+       <div class="gc-mark"><b>69.40 %</b><span>Course total · Moodle</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+
+     <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">PHY-101</span><h3>Functional Physics</h3><div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>1 of 4 assessments marked</span></div></div>
+       <div class="gc-mark"><span class="faint">No course total</span><span>Moodle has not given one yet</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+
+     <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">AR-102</span><h3>Arabic Language &amp; Communication</h3><div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>No assessments set</span></div></div>
+       <div class="gc-mark"><span class="faint">No course total</span><span>Nothing marked yet</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+    </div>
+   </section>
+
+   <!-- STUDENT AFFAIRS -->
+   <section>
+    <div class="gsec-h"><h2>Student Affairs</h2><span class="count">no courses</span></div>
+    <div class="state"><span class="ico"><svg class="i " viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></span><div><b style="color:var(--ink)">Nothing under Student Affairs carries a mark yet.</b><p class="small muted" style="margin-top:2px">Moodle answered — this is an empty record, not a failed read. Volunteering hours and clubs live on <a href="05-student-affairs.html" class="link" style="font-size:12px">Student Affairs</a>.</p></div></div>
+   </section>
+
+   <!-- IPO -->
+   <section>
+    <div class="gsec-h"><h2>IPO &amp; Apprenticeship</h2><span class="count">1 course</span></div>
+    <div class="card gc"><div class="gc-head">
+       <div class="gc-id"><span class="gc-code">IPO-304</span><h3>Placement readiness</h3><div class="gc-foot"><span class="badge ok"><span class="livedot"></span> Read live</span><span>1 of 1 assessment marked</span><span>·</span><span>Sally Hazeem, IPO coordinator</span></div></div>
+       <div class="gc-mark"><b>Competent</b><span>Scale · 2 of 3</span></div>
+       <span class="gc-chev"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div></div>
+   </section>
+  </div>
+
+  <aside class="rail">
+   <div class="card">
+    <div class="card-h"><h3>Reading your marks</h3></div>
+    <p class="small muted" style="margin-bottom:14px">Seven states, and only one of them is a number. None of the others is a zero.</p>
+    <div class="legend">
+     <span class="badge ok">Graded</span><span>Marked. A 0 here is a real zero.</span>
+     <span class="badge warn">In review</span><span>Submitted — awaiting marking.</span>
+     <span class="badge">Not submitted</span><span>Nothing handed in yet.</span>
+     <span class="badge">Excluded</span><span>Excluded from the total.</span>
+     <span class="badge">Withheld</span><span>Hidden from you in Moodle.</span>
+     <span class="badge warn">Unreadable</span><span>Could not be read.</span>
+     <span class="badge warn">No information</span><span>Moodle gave no answer.</span>
+    </div>
+   </div>
+   <div class="card tint">
+    <h3 style="margin-bottom:8px">Why is there no term average?</h3>
+    <p class="small" style="line-height:1.6">Moodle totals each course under its own policy — weights, drop-lowest, hidden items. Averaging those totals into one figure would be this app inventing a number, so every mark here is Moodle's own.</p>
+    <a class="link" style="margin-top:12px">Ask SARAH about my grades <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+   </div>
+   <div class="card">
+    <div class="card-h"><h3>When a read fails</h3><span class="badge">examples</span></div>
+    <div class="stack" style="gap:10px">
+     <div class="state" style="padding:14px"><span class="ico" style="background:var(--warn-50);color:var(--warn)"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg></span><div><b style="color:var(--ink);font-size:13px">Moodle is unreachable right now.</b><p class="small muted" style="margin:2px 0 8px">Rather than show a possibly-stale copy, the app waits.</p><span class="btn btn-ghost btn-sm">Try again</span></div></div>
+     <div class="state" style="padding:14px"><span class="ico" style="background:var(--warn-50);color:var(--warn)"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span><div><b style="color:var(--ink);font-size:13px">Not every course could be sorted.</b><p class="small muted" style="margin-top:2px">IPO &amp; Apprenticeship could not be identified, so those courses are listed under Courses. No mark is missing.</p></div></div>
+    </div>
+   </div>
+  </aside>
+ </div>
+</div></main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

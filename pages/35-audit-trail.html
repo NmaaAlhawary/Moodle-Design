@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit log · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4">
+<style>
+ .ledger { background:linear-gradient(110deg, #2E3340, var(--charcoal)); color:#fff; border-radius:var(--r-xl); padding:24px 28px; display:grid; grid-template-columns:1.6fr repeat(4,1fr); gap:24px; align-items:center; margin-bottom:22px; position:relative; overflow:hidden; }
+ .ledger .big { font-family:var(--font-display); font-size:44px; font-weight:700; line-height:1; }
+ .ledger .fig b { display:block; font-family:var(--font-display); font-size:26px; line-height:1.1; }
+ .ledger .fig span, .ledger .sub { font-size:12px; color:rgba(255,255,255,.75); }
+ .ledger .fig.f b { color:#FF9AA0; }
+ .ledger .fig { border-left:1px solid rgba(255,255,255,.15); padding-left:20px; }
+ .filters { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+ .sel { height:40px; border:1px solid var(--line); background:#fff; border-radius:10px; padding:0 12px; display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-2); }
+ .sel em { font-style:normal; color:var(--muted); font-size:11.5px; }
+ .strip { display:flex; align-items:flex-end; gap:10px; height:90px; padding:0 4px; }
+ .strip .d { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end; }
+ .strip .d i { width:100%; max-width:34px; display:flex; flex-direction:column-reverse; border-radius:6px 6px 3px 3px; overflow:hidden; }
+ .strip .d i s { display:block; background:var(--ok); text-decoration:none; }
+ .strip .d i u { display:block; background:var(--red); text-decoration:none; }
+ .strip .d span { font-size:10.5px; color:var(--muted); white-space:nowrap; }
+ .strip .d.on span { color:var(--ink); font-weight:700; }
+ .strip .d.on i { outline:2px solid var(--ink); outline-offset:2px; }
+ .dayh { display:flex; align-items:center; gap:10px; font-weight:600; color:var(--ink); font-size:13px; margin:18px 0 8px; }
+ .dayh .small { font-weight:500; }
+ .ev { display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:14px; padding:14px 16px; border:1px solid var(--line); border-radius:14px; background:#fff; margin-bottom:8px; align-items:start; }
+ .ev .node { width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:var(--ok-50); color:var(--ok); }
+ .ev.fail { border:1.5px solid #F0A9AE; background:#FFFBFB; }
+ .ev.fail .node { background:var(--red); color:#fff; }
+ .ev p { color:var(--ink); font-size:13.5px; }
+ .ev .meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:6px; font-size:12px; color:var(--muted); }
+ .ev .when { text-align:right; font-size:12px; color:var(--muted); white-space:nowrap; }
+ .ev .when b { display:block; color:var(--ink); font-size:13px; }
+ .reason { margin-top:8px; font-size:12.5px; color:var(--red-800); background:var(--red-50); border-radius:8px; padding:7px 10px; }
+ .evid { margin-top:10px; background:#16181D; color:#D6D9E0; border-radius:10px; padding:12px 14px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:11.5px; line-height:1.7; display:grid; grid-template-columns:120px 1fr; gap:0 12px; }
+ .evid i { font-style:normal; color:#8A90A0; }
+ .who { display:flex; gap:10px; align-items:center; padding:8px 0; }
+ .who b { color:var(--ink); font-size:13px; display:block; }
+ .pipe div { display:grid; grid-template-columns:26px 1fr; gap:10px; padding:8px 0; position:relative; font-size:12.5px; }
+ .pipe div i { font-style:normal; width:26px; height:26px; border-radius:50%; background:var(--red-50); color:var(--red-600); display:grid; place-items:center; font-weight:700; font-size:11px; }
+ .pipe div.cur i { background:var(--red); color:#fff; }
+ .pipe b { display:block; color:var(--ink); }
+ .tag { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
+  <button class="iconbtn navtoggle" aria-label="Menu" data-toggle-nav><svg class="i " viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="02-student-dashboard.html"><img src="../assets/htu-wordmark.png" alt="HTU"><div class="sub"><b>eLearning</b></div></a>
+  <nav class="mainnav"><a href="11-teacher-dashboard.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a><a href="11-teacher-dashboard.html" class="on"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg>My teaching</a><a href="12-course-reports.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v-4M12 15V8M17 15v-7"/></svg>Reports</a><a href="13-what-students-ask.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg>What students ask</a></nav>
+  <div class="mast-actions">
+    
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></span>
+    <a class="me" href="17-teacher-profile.html"><span class="avatar sm alt">OM</span><span><b>Dr. Omar</b><span>Lecturer</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div></div></header>
+<div class="sectionbar"><div class="wrap"><span class="home"><svg class="i " viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><div class="crumbs">My teaching <span>/</span> <b>Audit log</b></div><div class="spacer"></div><nav style="justify-content:flex-end;flex:none"><a href="30-teacher-courses.html" class="" style="white-space:nowrap">Courses</a><a href="31-quiz-studio.html" class="" style="white-space:nowrap">Quiz studio</a><a href="32-csv-import.html" class="" style="white-space:nowrap">Import from spreadsheet</a><a href="35-audit-trail.html" class="on" style="white-space:nowrap">Audit log</a></nav></div></div>
+<main class="page"><div class="wrap">
+<div class="pagehead"><div><span class="eyebrow">Accountability</span><h1 style="margin-top:6px">Audit log</h1><p>Every change written to Moodle — who, when, and whether it worked.</p></div>
+ <div class="row"><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export (.csv)</a><a class="btn btn-ghost" href="30-teacher-courses.html">Back to teaching</a></div></div>
+
+<section class="ledger"><div><span class="tag" style="color:rgba(255,255,255,.7)">The whole ledger</span><div class="row" style="gap:14px;margin-top:6px;align-items:baseline"><span class="big">64</span><span class="sub" style="font-size:14px;color:#fff">permanent changes written to Moodle</span></div><div class="sub" style="margin-top:8px">From 2 Sep 2026 to 13 Oct 2026 · these figures never follow the filters below</div></div>
+ <div class="fig"><b>61</b><span>Succeeded</span></div><div class="fig f"><b>3</b><span>Failed</span></div><div class="fig"><b>2</b><span>People</span></div><div class="fig"><b>4</b><span>Courses</span></div></section>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start">
+<section>
+ <div class="card" style="margin-bottom:18px">
+  <div class="filters">
+   <div class="search" style="width:250px;background:#fff"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input placeholder="A person, a course, an activity, a reason…"></div>
+   <span class="sel"><em>Who</em> Anyone <svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span><span class="sel"><em>Course</em> EM-210 <svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span><span class="sel"><em>Action</em> Any action <svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span><span class="sel"><em>Outcome</em> Any outcome <svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+  </div>
+  <div class="row small" style="gap:8px;margin-bottom:16px"><span class="muted">Narrowed by</span><span class="chip" style="height:26px;font-size:12px">EM-210 <svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span><span class="chip" style="height:26px;font-size:12px">Today <svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span><a class="link" style="font-size:12px">Clear filters</a><span class="spacer"></span><span class="muted">Showing 6 of 6 · 38 in EM-210 overall</span></div>
+  <div class="card-h" style="margin-bottom:8px"><h3>Matching writes by day</h3><a class="link" style="font-size:12px">Show every day</a></div>
+  <div class="strip">
+   <div class="d"><i style="height:30%"><s style="height:100%"></s></i><span>15 Sep</span></div>
+   <div class="d"><i style="height:22%"><s style="height:100%"></s></i><span>21 Sep</span></div>
+   <div class="d"><i style="height:52%"><s style="height:100%"></s></i><span>30 Sep</span></div>
+   <div class="d"><i style="height:92%"><u style="height:8%"></u><s style="height:92%"></s></i><span>6 Oct</span></div>
+   <div class="d"><i style="height:38%"><s style="height:100%"></s></i><span>8 Oct</span></div>
+   <div class="d"><i style="height:26%"><s style="height:100%"></s></i><span>9 Oct</span></div>
+   <div class="d"><i style="height:30%"><u style="height:34%"></u><s style="height:66%"></s></i><span>12 Oct</span></div>
+   <div class="d on"><i style="height:46%"><u style="height:17%"></u><s style="height:83%"></s></i><span>Today</span></div>
+  </div>
+  <p class="small muted" style="margin-top:10px">Only days that have writes are drawn — a quiet week is never shown as a busy one's neighbour. Select a day to narrow the log to it.</p>
+ </div>
+
+ <div class="dayh">Today <span class="small muted">· Tuesday 13 Oct · 6 writes · 1 failed · times in Amman (UTC+3)</span></div>
+
+ <div class="ev"><span class="node"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div><p><b>Dr. Omar Mansour</b> changed <b>Layla Haddad</b>'s grade for <b>Lab report 2</b> in EM-210 — 15.00 → 17.00.</p>
+  <div class="meta"><span class="badge">Grade changed</span><span class="badge ok">Succeeded</span><span>Re-read live ✓</span><a class="link" style="font-size:12px">Hide evidence</a></div>
+  <div class="evid"><i>id</i><span>aud_7f3c21e9</span><i>at</i><span>2026-10-13T09:06:14Z</span><i>actor.key</i><span>omar.mansour</span><i>action</i><span>grade_set</span><i>course.key</i><span>EM-210</span><i>target.key</i><span>EM-210:gi:lab2 · user:layla.haddad</span><i>detail.from</i><span>"15.00"</span><i>detail.to</i><span>"17.00"</span><i>outcome</i><span>success</span></div>
+  <p class="small muted" style="margin-top:6px">The gate's own field names, unrenamed — this is what to paste into a report.</p></div>
+  <div class="when"><b>12:06</b>Amman</div></div>
+
+ <div class="ev fail"><span class="node"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div><p><b>Dr. Omar Mansour</b> tried to delete <b>Lab 2 worksheet (old)</b> in EM-210.</p>
+  <div class="reason">Reason: The impact could not be read from Moodle, so the delete was blocked. Nothing changed.</div>
+  <div class="meta"><span class="badge">Delete</span><span class="badge red">Failed</span><span>Impact: submissions unknown · grades unknown</span><a class="link" style="font-size:12px">Evidence</a></div></div>
+  <div class="when"><b>11:58</b>Amman</div></div>
+
+ <div class="ev"><span class="node"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div><p><b>Dr. Omar Mansour</b> added <b>3 questions</b> to <b>Quiz 4 — Transformers</b> in EM-210 (3 → 6 slots).</p>
+  <div class="meta"><span class="badge">Quiz questions</span><span class="badge ok">Succeeded</span><a class="link" style="font-size:12px">Evidence</a></div></div>
+  <div class="when"><b>10:38</b>Amman</div></div>
+
+ <div class="ev"><span class="node"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div><p><b>Dr. Omar Mansour</b> published changes to <b>Electrical Machines</b>: 2 new, 2 changed, 0 removed, 1 skipped.</p>
+  <div class="meta"><span class="badge">Publish</span><span class="badge ok">Succeeded</span><span>4 writes in one publish · snapshot v5 saved first</span><a class="link" style="font-size:12px">Evidence</a></div></div>
+  <div class="when"><b>10:21</b>Amman</div></div>
+
+ <div class="ev"><span class="node"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div><p><b>Mai Hijazi</b> hid <b>Week 5 — Induction motors</b> slides from students in EM-210.</p>
+  <div class="meta"><span class="badge">Visibility</span><span class="badge ok">Succeeded</span><span>Teaching assistant</span><a class="link" style="font-size:12px">Evidence</a></div></div>
+  <div class="when"><b>09:47</b>Amman</div></div>
+
+ <div class="ev" style="border-color:var(--warn)"><span class="node" style="background:var(--warn-50);color:var(--warn)"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div><p><span class="badge warn"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> actor not recorded</span> renamed <b>“Welcome”</b> to <b>“Welcome &amp; orientation”</b> in EM-210.</p>
+  <div class="meta"><span class="badge">Rename</span><span class="badge ok">Succeeded</span><span>The gate wrote no name for this row — flagged as a data problem, never shown as “unknown”.</span></div></div>
+  <div class="when"><b>08:12</b>Amman</div></div>
+
+ <a class="btn btn-ghost btn-block" style="margin-top:6px">Show more</a>
+</section>
+
+<aside class="stack">
+ <div class="card" style="border:1.5px solid #F0A9AE"><div class="card-h" style="margin-bottom:8px"><h3 style="color:var(--red-600)"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m9 9 6 6M15 9l-6 6"/></svg> 3 writes failed</h3></div>
+  <p class="small muted">The most recent one, in the source's own words:</p>
+  <div class="reason" style="margin:8px 0 12px">“You do not have permission to change activity visibility in this course.” <div class="small" style="color:var(--muted);margin-top:4px">CS-201 · Hide “Week 3 forum” · yesterday 15:02</div></div>
+  <a class="btn btn-soft btn-sm btn-block">Show only failures</a></div>
+
+ <div class="card"><div class="card-h"><h3>Who wrote</h3><span class="small muted">whole ledger</span></div>
+  <div class="who"><span class="avatar sm alt">OM</span><div style="flex:1"><b>Dr. Omar Mansour</b><div class="bar thin" style="margin-top:6px"><i style="width:89%"></i></div></div><span class="small muted">57 of 64</span></div>
+  <div class="who"><span class="avatar sm alt3">MH</span><div style="flex:1"><b>Mai Hijazi</b><div class="bar thin" style="margin-top:6px"><i style="width:9%"></i></div></div><span class="small muted">6 of 64</span></div>
+  <div class="who"><span class="avatar sm" style="background:var(--warn-50);color:#9A6200!important">?</span><div style="flex:1"><b style="color:#9A6200">Actor not recorded</b><div class="bar thin" style="margin-top:6px"><i style="width:2%;background:var(--warn)"></i></div></div><span class="small muted">1 of 64</span></div></div>
+
+ <div class="card"><div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg> How a write earns a row here</h3></div>
+  <div class="pipe">
+   <div><i>1</i><span><b>Preview</b><span class="muted">The change is described. Nothing is written.</span></span></div>
+   <div><i>2</i><span><b>Capability check</b><span class="muted">Moodle decides whether this person may do it.</span></span></div>
+   <div><i>3</i><span><b>Impact count</b><span class="muted">A destructive write states what it will destroy, counted live.</span></span></div>
+   <div><i>4</i><span><b>Confirm</b><span class="muted">Pressed once. An idempotency key stops a double.</span></span></div>
+   <div class="cur"><i>5</i><span><b>Record</b><span class="muted">This log's row — who, when, what, and whether it worked.</span></span></div>
+   <div><i>6</i><span><b>Live re-read</b><span class="muted">The change is read back from Moodle, so the screen shows what is really there.</span></span></div>
+  </div></div>
+ <div class="card tint"><div class="row" style="align-items:flex-start"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 8h.01"/></svg><span class="small">You see changes in courses you can access, and no others — Moodle decides. Times are shown in your zone; the exact UTC instant is in each row's evidence.</span></div></div>
+</aside>
+</div>
+</div></main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

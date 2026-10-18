@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affairs reports · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>.rpick { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-bottom:24px; }
+.rp { background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:14px 16px; display:flex; flex-direction:column; gap:8px; box-shadow:var(--shadow-sm); }
+.rp b { color:var(--ink); font-size:13.5px; font-family:var(--font-display); font-weight:600; }
+.rp span.small { color:var(--muted); }
+.rp.on { border-color:var(--red); box-shadow:0 0 0 4px rgba(232,52,63,.08); }
+.rp .ic { width:32px; height:32px; border-radius:10px; display:grid; place-items:center; background:var(--canvas); color:var(--ink-2); }
+.rp.on .ic { background:var(--red); color:#fff; }
+.filters { display:grid; grid-template-columns:repeat(5,1fr) auto; gap:12px; align-items:end; padding:16px 0 20px; border-bottom:1px solid var(--line); margin-bottom:8px; }
+.filters .field label { font-size:11.5px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+.filters .input { height:40px; font-size:13px; justify-content:space-between; }
+.filters .input .ph { font-size:13px; }
+.num, .table th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.tfoot { display:flex; align-items:center; justify-content:space-between; padding-top:14px; font-size:12.5px; }
+.pager { display:flex; gap:4px; }
+.pager a { min-width:30px; height:30px; padding:0 8px; border-radius:8px; border:1px solid var(--line); display:grid; place-items:center; font-weight:600; font-size:12.5px; background:#fff; }
+.pager a.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+@media (max-width:1100px){ .rpick{grid-template-columns:repeat(3,1fr)} .filters{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:760px){ .rpick,.filters{grid-template-columns:1fr 1fr} }</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
+  <button class="iconbtn navtoggle" aria-label="Menu" data-toggle-nav><svg class="i " viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="40-affairs-review.html"><img src="../assets/htu-wordmark.png" alt="HTU"><div class="sub"><b>eLearning</b></div></a>
+  <nav class="mainnav"><a href="#" class=""><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Overview</a><a href="39-affairs-post.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 8v8M8 12h8"/></svg>Post</a><a href="40-affairs-review.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.1z"/></svg>Review queue</a><a href="42-affairs-reports.html" class="on"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v-4M12 15V8M17 15v-7"/></svg>Reports</a></nav>
+  <div class="mast-actions">
+    
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></span>
+    <a class="me" href="40-affairs-review.html"><span class="avatar sm alt2">SH</span><span><b>Sally</b><span>IPO coordinator</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div></div></header>
+<main class="page"><div class="wrap">
+<div class="pagehead"><div><span class="eyebrow">Student Affairs</span><h1 style="margin-top:6px">Reports</h1><p class="row" style="gap:8px">The six student-level reports, across everyone. <span class="badge info">Read 2 minutes ago</span></p></div><div class="row"><div class="seg"><a>Term</a><a class="on">Fall 2026</a><a>Year</a></div><a class="btn btn-primary"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export CSV</a></div></div>
+
+ <div class="rpick">
+  <a class="rp on"><span class="ic"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></span><b>Engagement</b><span class="small">Clubs, activities, volunteering, sports</span></a>
+  <a class="rp"><span class="ic"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><b>Work &amp; apprenticeship</b><span class="small">Jobs, basis, company</span></a>
+  <a class="rp"><span class="ic"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/></svg></span><b>Achievements</b><span class="small">Awards, competitions, certificates</span></a>
+  <a class="rp"><span class="ic"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5a14.5 14.5 0 0 1 0 19M12 2.5a14.5 14.5 0 0 0 0 19"/></svg></span><b>Global &amp; exchange</b><span class="small">Exchange, languages, interests</span></a>
+  <a class="rp"><span class="ic"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><b>Skills &amp; interests</b><span class="small">Soft and technical skills</span></a>
+  <a class="rp"><span class="ic"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><b>Academic &amp; general</b><span class="small">GPA, standing, warnings</span></a>
+ </div>
+
+ <div class="grid g4" style="margin-bottom:24px">
+  <div class="kpi"><span class="ico b"><svg class="i " viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></span><div><div class="lbl">Students engaged</div><div class="val">1,284 <small>of 4,862</small></div></div></div>
+  <div class="kpi"><span class="ico g"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><div class="lbl">Hours logged</div><div class="val">18,940 <small>hrs</small></div><span class="delta">+12% vs spring</span></div></div>
+  <div class="kpi"><span class="ico v"><svg class="i " viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></span><div><div class="lbl">Clubs and teams active</div><div class="val">34</div></div></div>
+  <div class="kpi"><span class="ico o"><svg class="i " viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v-4M12 15V8M17 15v-7"/></svg></span><div><div class="lbl">Median hours per student</div><div class="val">11 <small>hrs</small></div></div></div>
+ </div>
+
+ <section class="card" style="margin-bottom:24px">
+  <div class="card-h" style="margin-bottom:0"><div><h2>Engagement</h2><span class="small muted">One row per student per club, activity, volunteering role or team.</span></div><span class="badge">2,416 rows</span></div>
+  <div class="filters">
+   <div class="field"><label>Type</label><div class="input">Volunteering <svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div></div>
+   <div class="field"><label>Role</label><div class="input"><span class="ph">Any role</span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div></div>
+   <div class="field"><label>Team</label><div class="input"><span class="ph">Any team</span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div></div>
+   <div class="field"><label>From</label><div class="input">01-09-2026 <svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div></div>
+   <div class="field"><label>To</label><div class="input"><span class="ph">Today</span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div></div>
+   <a class="btn btn-ghost" style="height:40px">Clear</a>
+  </div>
+  <table class="table">
+   <tr><th>Student</th><th>Type</th><th>What</th><th>Role</th><th>Team</th><th class="num">Hours</th><th>Started</th><th>Ended</th></tr>
+   <tr><td><b>Layla Haddad</b> <span class="small muted">2023-0412</span></td><td><span class="badge red">Volunteering</span></td><td>Winter food drive</td><td>Route lead</td><td>Takaful Team</td><td class="num"><b>16</b></td><td>17-10-2026</td><td class="muted">—</td></tr>
+   <tr><td><b>Nour Zahran</b> <span class="small muted">2022-0951</span></td><td><span class="badge red">Volunteering</span></td><td>Winter food drive</td><td>Driver</td><td>Takaful Team</td><td class="num"><b>8</b></td><td>17-10-2026</td><td class="muted">—</td></tr>
+   <tr><td><b>Sara Mansour</b> <span class="small muted">2025-0033</span></td><td><span class="badge red">Volunteering</span></td><td>Campus clean-up day</td><td>Volunteer</td><td>HTU Green Community</td><td class="num"><b>6</b></td><td>26-09-2026</td><td>26-09-2026</td></tr>
+   <tr><td><b>Omar Masri</b> <span class="small muted">2024-0187</span></td><td><span class="badge red">Volunteering</span></td><td>Coding for kids</td><td>Mentor</td><td>Code Circle</td><td class="num"><b>24</b></td><td>14-09-2026</td><td class="muted">—</td></tr>
+   <tr><td><b>Dana Saleh</b> <span class="small muted">2023-0278</span></td><td><span class="badge red">Volunteering</span></td><td>Orientation week</td><td>Guide</td><td>Students' Union</td><td class="num"><b>12</b></td><td>06-09-2026</td><td>10-09-2026</td></tr>
+   <tr><td><b>Yousef Ali</b> <span class="small muted">2024-0566</span></td><td><span class="badge red">Volunteering</span></td><td>Orientation week</td><td>Guide</td><td>Students' Union</td><td class="num"><b>12</b></td><td>06-09-2026</td><td>10-09-2026</td></tr>
+   <tr><td><b>Khaled Tamimi</b> <span class="small muted">2025-0410</span></td><td><span class="badge red">Volunteering</span></td><td>Blood donation drive</td><td>Volunteer</td><td>Siwar Team</td><td class="num"><b>4</b></td><td>03-09-2026</td><td>03-09-2026</td></tr>
+  </table>
+  <div class="tfoot"><span class="muted">Showing 1–7 of 186 volunteering rows</span><div class="pager"><a>‹</a><a class="on">1</a><a>2</a><a>3</a><a>…</a><a>27</a><a>›</a></div></div>
+ </section>
+
+ <section class="card" id="mine">
+  <div class="card-h"><div><h2>My opportunities</h2><span class="small muted">Everything you have posted. Open one to run it in Moodle.</span></div><a class="btn btn-sm btn-soft" href="39-affairs-post.html"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Post another</a></div>
+  <table class="table">
+   <tr><th>Opportunity</th><th>Type</th><th>Moodle course</th><th>Status</th><th class="num">Applications</th><th class="num">Waiting</th><th>Closes</th><th></th></tr>
+   <tr><td><b>Takaful Team — Winter food drive</b></td><td>Volunteering</td><td>TAK-WFD-F26</td><td><span class="badge ok">Open</span></td><td class="num">32</td><td class="num"><b>6</b></td><td>17-10-2026</td><td style="text-align:right"><a class="link">Open in Moodle <svg class="i i-sm" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a></td></tr>
+   <tr><td><b>Cyber Security Club — CTF squad</b></td><td>Club</td><td>CSC-CTF-F26</td><td><span class="badge ok">Open</span></td><td class="num">9</td><td class="num"><b>1</b></td><td class="muted">No close date</td><td style="text-align:right"><a class="link">Open in Moodle <svg class="i i-sm" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a></td></tr>
+   <tr><td><b>Erasmus+ exchange — Spring 2027</b></td><td>International</td><td>ERA-S27</td><td><span class="badge ok">Open</span></td><td class="num">21</td><td class="num"><b>7</b></td><td>14-10-2026</td><td style="text-align:right"><a class="link">Open in Moodle <svg class="i i-sm" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a></td></tr>
+   <tr><td><b>Dean’s List — Fall 2026</b></td><td>Award</td><td>SAO-DL-F26</td><td><span class="badge">Closed</span></td><td class="num">—</td><td class="num">—</td><td>01-10-2026</td><td style="text-align:right"><a class="link">Open in Moodle <svg class="i i-sm" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a></td></tr>
+   <tr><td><b>HTU Football — tryouts</b></td><td>Sports</td><td class="muted">No course yet</td><td><span class="badge">Draft</span></td><td class="num">—</td><td class="num">—</td><td>22-10-2026</td><td style="text-align:right"><span class="small muted">No course attached to open.</span></td></tr>
+  </table>
+ </section>
+</div></main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

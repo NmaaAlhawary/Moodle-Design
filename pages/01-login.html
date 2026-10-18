@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>
+.input input { border: 0; outline: none; background: none; font: inherit; color: var(--ink); flex: 1; min-width: 0; }
+.demo-roles { margin-top: 26px; padding-top: 22px; border-top: 1px dashed var(--line); }
+.demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.demo { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.demo:hover { border-color: var(--red); box-shadow: 0 6px 16px rgba(232,52,63,.14); transform: translateY(-2px); }
+.demo.on { border-color: var(--red); background: var(--red-50, #fdeeee); }
+.demo .avatar { width: 32px; height: 32px; font-size: 11px; flex: none; }
+.demo b { display: block; font-size: 12.5px; color: var(--ink); line-height: 1.2; }
+.demo small { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.demo > span:last-child { min-width: 0; }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var homes = {}; document.querySelectorAll('.demo').forEach(function (d) { homes[d.dataset.user] = d.getAttribute('href'); });
+  var user = document.getElementById('login-user'), go = document.getElementById('login-go');
+  function sync() {
+    var u = user.value.trim().toLowerCase().replace(/@htu\.edu\.jo$/, '');
+    go.setAttribute('href', homes[u] || '02-student-dashboard.html');
+    document.querySelectorAll('.demo').forEach(function (d) { d.classList.toggle('on', d.dataset.user === u); });
+  }
+  user.addEventListener('input', sync); sync();
+  document.querySelectorAll('.input input').forEach(function (i) { i.addEventListener('keydown', function (e) { if (e.key === 'Enter') location.href = go.getAttribute('href'); }); });
+  var eye = document.getElementById('login-pass').parentElement.querySelector('.muted');
+  if (eye) { eye.style.cursor = 'pointer'; eye.addEventListener('click', function () { var p = document.getElementById('login-pass'); p.type = p.type === 'password' ? 'text' : 'password'; }); }
+});
+</script></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div>
+<main style="background:linear-gradient(180deg,#fff, #F7F7F9)">
+  <div class="wrap" style="padding:40px 0 64px">
+    <div style="display:flex;justify-content:center;margin-bottom:34px"><img src="../assets/htu-wordmark.png" style="height:58px" alt="HTU"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;max-width:1060px;margin:0 auto;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);background:#fff">
+      <div style="padding:56px 64px;display:flex;flex-direction:column;justify-content:center">
+        <span class="eyebrow">HTU eLearning</span>
+        <h1 style="font-size:34px;margin:10px 0 8px">Welcome back</h1>
+        <p class="muted" style="margin-bottom:30px">One door to your courses, your record, and the people who teach you.</p>
+        <div class="stack" style="gap:18px">
+          <div class="field"><label>Username or email</label><label class="input focus"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><input id="login-user" value="layla.haddad" autocomplete="username" aria-label="Username or email"></label></div>
+          <div class="field"><label>Password</label><label class="input"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><input id="login-pass" type="password" value="demo-pass" autocomplete="current-password" aria-label="Password"><span class="spacer"></span><span class="muted"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span></label></div>
+          <div class="row between"><span class="check"><i class="on"></i>Remember me</span><a class="link">Forgot password?</a></div>
+          <a href="02-student-dashboard.html" id="login-go" class="btn btn-primary btn-lg btn-block">Sign in <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <div class="row" style="gap:14px;color:var(--muted);font-size:12px"><span style="flex:1;height:1px;background:var(--line)"></span>or<span style="flex:1;height:1px;background:var(--line)"></span></div>
+          <a class="btn btn-ghost btn-lg btn-block"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Sign in with HTU single sign-on</a>
+        </div>
+        <div class="demo-roles">
+          <div class="row between" style="margin-bottom:10px"><span class="eyebrow" style="font-size:11px">Demo accounts · one tap to sign in</span><span class="small muted">Preview every role</span></div>
+          <div class="demo-grid">
+            <a class="demo" href="02-student-dashboard.html" data-user="layla.haddad"><span class="avatar">LH</span><span><b>Student</b><small>layla.haddad</small></span></a>
+            <a class="demo" href="11-teacher-dashboard.html" data-user="omar.mansour"><span class="avatar alt3">OM</span><span><b>Teacher</b><small>omar.mansour</small></span></a>
+            <a class="demo" href="18-manager-dashboard.html" data-user="huda.nasser"><span class="avatar alt2">HN</span><span><b>Manager</b><small>huda.nasser</small></span></a>
+            <a class="demo" href="40-affairs-review.html" data-user="sally.hazeem"><span class="avatar alt">SH</span><span><b>Student Affairs</b><small>sally.hazeem</small></span></a>
+            <a class="demo" href="43-admin-people.html" data-user="gate_admin"><span class="avatar" style="background:linear-gradient(135deg,#3a3f4b,#1f232b)">GA</span><span><b>Admin</b><small>gate_admin</small></span></a>
+          </div>
+        </div>
+        <div class="row between" style="margin-top:28px;font-size:12.5px"><span class="row small muted" style="gap:6px"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Only Moodle checks your password.</span><a class="link" style="font-weight:500">Cookies notice</a></div>
+      </div>
+      <div style="position:relative;min-height:600px;background:url(../assets/graduates.jpg) center/cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(142,21,32,0) 40%,rgba(80,8,14,.85))"></div>
+        <div style="position:absolute;left:36px;right:36px;bottom:36px;color:#fff">
+          <span class="badge" style="background:rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(8px)"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg> Class of 2026</span>
+          <h2 style="color:#fff;font-size:28px;margin:12px 0 14px">Everything you are studying, in one place.</h2>
+          <div class="stack" style="gap:8px;font-size:13.5px;opacity:.92"><span class="row" style="gap:8px">✓ Your courses, materials and marks — read live from Moodle.</span><span class="row" style="gap:8px">✓ An activity locked? See the exact rule holding it.</span><span class="row" style="gap:8px">✓ Student Affairs and your IPO record, beside the work they belong to.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:84px 0 34px">
+      <h2 style="font-size:40px;font-weight:700">Few more about <span style="color:var(--red)">HTU eLearning</span></h2>
+      <svg width="120" height="14" viewBox="0 0 120 14" style="margin:6px auto 0;display:block;transform:translateX(120px)"><path d="M2 10 C 40 0, 80 0, 118 10" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+      <p class="muted" style="margin-top:12px">Everything a student needs — in one place, in English and Arabic.</p>
+    </div>
+    <div class="grid g3" style="max-width:1060px;margin:0 auto">
+      <div class="tile" style="background:linear-gradient(135deg,#8E1520,#E8343F)"><div class="pix"></div><div><svg class="i i-lg" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg><h3 style="margin-top:14px">Courses</h3><p>Academic and career-focused content delivered through flexible online modules.</p></div><span class="go">See more <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#2E3340,#5B6475)"><div class="pix"></div><div><svg class="i i-lg" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg><h3 style="margin-top:14px">Students Affairs</h3><p>Clubs, volunteering, achievements and opportunities — your record beyond the classroom.</p></div><span class="go">See more <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#B5521B,#E8343F)"><div class="pix"></div><div><svg class="i i-lg" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M10 21v-4h4v4"/></svg><h3 style="margin-top:14px">Industry Partnership Office</h3><p>Your IPO journey from placement to graduation, step by step.</p></div><span class="go">See more <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+    </div>
+  </div>
+</main><section class="cta"><div class="wrap"><img src="../assets/htu-wordmark.png" alt=""><div><span>Upgrade your employability through HTUx</span><b>Study alone, play together — tech-focused, accelerated learning pathways.</b></div><a class="btn btn-lg">Join HTUx now <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

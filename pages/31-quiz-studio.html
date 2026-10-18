@@ -1,0 +1,186 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz studio · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4">
+<style>
+ .table th { white-space:nowrap; }
+ .spine { display:grid; grid-template-columns:repeat(6,1fr); gap:0; background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow-sm); margin-bottom:22px; overflow:hidden; }
+ .spine > div { padding:14px 16px; display:flex; gap:10px; align-items:center; border-right:1px solid var(--line); position:relative; }
+ .spine > div:last-child { border:0; }
+ .spine i { font-style:normal; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:12px; flex:none; background:var(--ok-50); color:var(--ok); }
+ .spine > div.cur { background:var(--red-50); }
+ .spine > div.cur i { background:var(--red); color:#fff; }
+ .spine > div.todo i { background:var(--canvas); color:var(--muted); }
+ .spine b { display:block; color:var(--ink); font-size:13px; line-height:1.2; }
+ .spine span span { display:block; font-size:11.5px; color:var(--muted); }
+ .drop { border:1.5px dashed #D9DBE1; border-radius:12px; padding:18px; text-align:center; background:#FCFCFD; display:flex; flex-direction:column; align-items:center; gap:6px; }
+ .drop .ico { width:40px; height:40px; border-radius:12px; background:var(--red-50); color:var(--red); display:grid; place-items:center; }
+ .mfile { display:flex; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); }
+ .mfile:last-child { border:0; }
+ .mfile .fi { width:34px; height:34px; border-radius:9px; background:var(--canvas); display:grid; place-items:center; color:var(--muted); flex:none; }
+ .mfile b { color:var(--ink); font-size:12.5px; display:block; line-height:1.25; }
+ .lbl2 { font-size:12px; font-weight:600; color:var(--ink); margin:14px 0 6px; display:block; }
+ .input.sm { height:38px; font-size:13px; }
+ .q { border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px; background:#fff; }
+ .q.disc { background:#FCFCFD; border-style:dashed; }
+ .q.disc .qt { color:var(--muted); text-decoration:line-through; text-decoration-color:#C9CCD3; }
+ .q .n { font-family:var(--font-display); font-weight:700; color:var(--muted); font-size:12px; }
+ .qt { color:var(--ink); font-weight:600; font-size:14px; margin:6px 0 10px; }
+ .opts { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+ .opt { font-size:12.5px; padding:7px 10px; border-radius:8px; background:var(--canvas); display:flex; gap:8px; align-items:center; }
+ .opt.ok { background:var(--ok-50); color:#14704A; font-weight:600; }
+ .qf { display:flex; align-items:center; gap:8px; margin-top:12px; }
+ .qrow { display:flex; align-items:center; gap:12px; padding:11px 4px; border-bottom:1px solid var(--line); font-size:13px; }
+ .qrow:last-child { border:0; }
+ .callout { border-radius:12px; padding:12px 14px; display:flex; gap:10px; align-items:flex-start; font-size:12.5px; }
+ .callout.warn { background:var(--warn-50); color:#7A4E00; }
+ .callout.info { background:var(--info-50); color:#1D3F91; }
+ .callout.ok { background:var(--ok-50); color:#14704A; }
+ .callout.bad { background:var(--red-50); color:var(--red-800); }
+ .ans { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+ .radio { width:18px; height:18px; border-radius:50%; border:1.5px solid #C9CCD3; flex:none; }
+ .radio.on { border:5px solid var(--ok); }
+ .staged { display:flex; gap:10px; align-items:center; padding:10px 12px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; font-size:12.5px; }
+ .staged b { color:var(--ink); display:block; }
+ .dlg { border:1px solid var(--line); border-top:4px solid var(--red); border-radius:var(--r-lg); box-shadow:var(--shadow-lg); background:#fff; padding:20px; }
+ .dlg h3 { margin-bottom:4px; }
+ .kv { display:grid; grid-template-columns:110px 1fr; gap:6px 12px; font-size:12.5px; margin:12px 0; }
+ .kv dt { color:var(--muted); } .kv dd { color:var(--ink); font-weight:500; }
+ .chk { display:flex; gap:8px; align-items:center; font-size:12.5px; padding:6px 0; }
+ .chk .okc { color:var(--ok); }
+ .tag { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
+  <button class="iconbtn navtoggle" aria-label="Menu" data-toggle-nav><svg class="i " viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="02-student-dashboard.html"><img src="../assets/htu-wordmark.png" alt="HTU"><div class="sub"><b>eLearning</b></div></a>
+  <nav class="mainnav"><a href="11-teacher-dashboard.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a><a href="11-teacher-dashboard.html" class="on"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg>My teaching</a><a href="12-course-reports.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v-4M12 15V8M17 15v-7"/></svg>Reports</a><a href="13-what-students-ask.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg>What students ask</a></nav>
+  <div class="mast-actions">
+    
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></span>
+    <a class="me" href="17-teacher-profile.html"><span class="avatar sm alt">OM</span><span><b>Dr. Omar</b><span>Lecturer</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div></div></header>
+<div class="sectionbar"><div class="wrap"><span class="home"><svg class="i " viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><div class="crumbs">My teaching <span>/</span> <b>Quiz studio</b></div><div class="spacer"></div><nav style="justify-content:flex-end;flex:none"><a href="30-teacher-courses.html" class="" style="white-space:nowrap">Courses</a><a href="31-quiz-studio.html" class="on" style="white-space:nowrap">Quiz studio</a><a href="32-csv-import.html" class="" style="white-space:nowrap">Import from spreadsheet</a><a href="35-audit-trail.html" class="" style="white-space:nowrap">Audit log</a></nav></div></div>
+<main class="page"><div class="wrap">
+<div class="pagehead"><div><span class="eyebrow">Quiz studio</span><h1 style="margin-top:6px">Generate a quiz from your material</h1><p>Generate from your own lectures, review every question, then publish — or write questions straight into a Moodle quiz below.</p></div>
+ <div class="row"><span class="badge ok" style="height:32px;padding:0 12px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15v4M17 17h4"/></svg> Generator connected</span><div class="input sm" style="width:300px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg><span style="flex:1">EM-210 · Electrical Machines</span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div></div></div>
+
+<div class="spine">
+ <div><i><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></i><span><b>Upload</b><span>2 files</span></span></div>
+ <div><i><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></i><span><b>Analyze</b><span>148 chunks</span></span></div>
+ <div><i><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></i><span><b>Configure</b><span>completed</span></span></div>
+ <div><i><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></i><span><b>Generate</b><span>10 questions</span></span></div>
+ <div class="cur"><i>5</i><span><b>Review</b><span>3 pending</span></span></div>
+ <div class="todo"><i>6</i><span><b>Publish</b><span>not yet</span></span></div>
+</div>
+
+<div style="display:grid;grid-template-columns:330px minmax(0,1fr);gap:24px;align-items:start;margin-bottom:28px">
+ <aside class="stack">
+  <div class="card"><div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/></svg> Source material</h3><span class="badge">EM-210</span></div>
+   <div class="drop"><span class="ico"><svg class="i " viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></span><b style="color:var(--ink);font-size:13px">Drop files or browse</b><span class="small muted">PDF · DOCX · PPTX · TXT · MD</span></div>
+   <span class="lbl2">Chapter / topic label</span><div class="input sm"><span class="ph">e.g. Week 5 — Induction motors</span></div>
+   <a class="btn btn-ghost btn-sm btn-block" style="margin-top:10px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Upload &amp; index</a>
+   <div style="margin-top:14px">
+    <div class="mfile"><span class="fi"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/></svg></span><div style="flex:1;min-width:0"><b>Lecture 9 — Transformers.pdf</b><span class="small muted">Week 4 · 96 chunks</span></div><span class="badge ok">Analyzed</span></div>
+    <div class="mfile"><span class="fi"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/></svg></span><div style="flex:1;min-width:0"><b>Transformer tests — slides.pptx</b><span class="small muted">Week 4 · 52 chunks</span></div><span class="badge ok">Analyzed</span></div>
+    <div class="mfile"><span class="fi"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/></svg></span><div style="flex:1;min-width:0"><b>Lab 3 handout (scan).pdf</b><span class="small" style="color:var(--red-600)">No text could be extracted</span></div><span class="badge red">Failed</span></div>
+   </div></div>
+
+  <div class="card"><div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg> Configuration</h3></div>
+   <div class="row" style="gap:10px"><div style="flex:1"><span class="lbl2" style="margin-top:0">Questions</span><div class="input sm">10</div></div><div style="flex:1"><span class="lbl2" style="margin-top:0">Assessment</span><div class="seg" style="width:100%"><a class="on" style="flex:1;text-align:center">Quiz</a><a style="flex:1;text-align:center">Exam</a></div></div></div>
+   <span class="lbl2">Difficulty</span><div class="seg" style="width:100%"><a style="flex:1;text-align:center">Intro</a><a class="on" style="flex:1;text-align:center">Balanced</a><a style="flex:1;text-align:center">Advanced</a></div>
+   <span class="lbl2">Question types</span><div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge dark">Multiple choice</span><span class="badge dark">True / False</span><span class="badge">Short answer</span><span class="badge">Numerical</span></div>
+   <span class="lbl2">Chapters <span class="muted" style="font-weight:400">· none selected draws on all</span></span>
+   <div class="check" style="padding:3px 0"><i class="on"></i> Week 4 — Transformers</div><div class="check" style="padding:3px 0"><i></i> Week 3 — DC motors</div>
+   <a class="btn btn-primary btn-block" style="margin-top:16px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15v4M17 17h4"/></svg> Generate questions</a>
+   <p class="small muted" style="margin-top:8px">Regenerating replaces the 10 questions on the right. The current set stays saved as a draft.</p></div>
+
+  <div class="card"><div class="card-h"><h3>Recent assessments</h3></div>
+   <div class="qrow"><div style="flex:1"><b style="color:var(--ink)">Transformers check</b><div class="small muted">10 questions · today 10:12</div></div><span class="badge">Draft</span></div>
+   <div class="qrow"><div style="flex:1"><b style="color:var(--ink)">DC motors practice</b><div class="small muted">8 questions · 29 Sep</div></div><span class="badge ok">Published</span></div>
+  </div>
+ </aside>
+
+ <section class="card">
+  <div class="card-h"><div><h2>Generated questions</h2><p class="small muted" style="margin-top:4px">Transformers check · 10 questions · 6 approved · 3 need review · 1 discarded</p></div><div class="row" style="gap:8px"><label class="check small"><span class="switch on"></span> Show answers</label><a class="btn btn-ghost btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> Approve all</a></div></div>
+  <div class="callout info" style="margin-bottom:16px"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 8h.01"/></svg><span>Approving and discarding is your own review pass on this screen — nothing stores a review state. <b>Publishing sends the assessment exactly as it was generated, all 10 questions</b>, so regenerate if a discarded question must not reach students.</span></div>
+
+  <div class="q"><div class="row between"><span class="n">Q1 · Multiple choice · 1 mark</span><span class="badge ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> Approved</span></div>
+   <div class="qt">In an ideal transformer, the ratio V₁/V₂ is equal to…</div>
+   <div class="opts"><span class="opt ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> N₁/N₂</span><span class="opt">N₂/N₁</span><span class="opt">I₁/I₂</span><span class="opt">(N₁/N₂)²</span></div>
+   <div class="qf"><span class="small muted">Source: Week 4 — Transformers · Lecture 9, p. 6</span></div></div>
+
+  <div class="q" style="border-color:var(--warn);box-shadow:0 0 0 3px var(--warn-50)"><div class="row between"><span class="n">Q2 · Multiple choice · 1 mark</span><span class="badge warn">Needs review</span></div>
+   <div class="qt">What does the open-circuit test of a transformer mainly measure?</div>
+   <div class="opts"><span class="opt ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> Core (iron) losses</span><span class="opt">Copper losses</span><span class="opt">Leakage reactance</span><span class="opt">Winding resistance</span></div>
+   <div class="qf"><span class="small muted">Source: Week 4 — Transformer tests slides, slide 14</span><span class="spacer"></span><a class="btn btn-ghost btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg> Discard</a><a class="btn btn-soft btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> Approve</a></div></div>
+
+  <div class="q"><div class="row between"><span class="n">Q3 · True / False · 1 mark</span><span class="badge warn">Needs review</span></div>
+   <div class="qt">A step-up transformer increases both voltage and current on its secondary side.</div>
+   <div class="opts"><span class="opt">True</span><span class="opt ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> False</span></div>
+   <div class="qf"><span class="small muted">Source: Week 4 — Transformers · Lecture 9, p. 3</span><span class="spacer"></span><a class="btn btn-ghost btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg> Discard</a><a class="btn btn-soft btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> Approve</a></div></div>
+
+  <div class="q disc"><div class="row between"><span class="n">Q4 · Multiple choice · 1 mark</span><span class="badge">Discarded · still in the stored assessment</span></div>
+   <div class="qt">Which lab bench is used for the short-circuit test?</div>
+   <div class="qf"><span class="small muted">Source: Lab 3 handout — chapter failed to index; question kept as generated</span><span class="spacer"></span><a class="link" style="font-size:12px">Undo</a></div></div>
+
+  <div class="qrow"><span class="badge ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="n" style="width:28px">Q5</span><span style="flex:1;color:var(--ink)">Efficiency is maximum when copper losses equal…</span><span class="small muted">MCQ · 1</span></div>
+  <div class="qrow"><span class="badge ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="n" style="width:28px">Q6</span><span style="flex:1;color:var(--ink)">Voltage regulation of a transformer at lagging power factor is…</span><span class="small muted">MCQ · 1</span></div>
+  <div class="qrow"><span class="badge warn">!</span><span class="n" style="width:28px">Q7</span><span style="flex:1;color:var(--ink)">An auto-transformer uses a single winding for primary and secondary.</span><span class="small muted">T/F · 1</span></div>
+  <div class="qrow"><span class="badge ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="n" style="width:52px;white-space:nowrap">Q8–10</span><span style="flex:1;color:var(--muted)">3 more approved questions</span><a class="link" style="font-size:12px">Expand</a></div>
+
+  <div class="row" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)"><span class="small muted" style="flex:1"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 8h.01"/></svg> Already stored as a draft — generating saved it.</span><a class="btn btn-ghost" style="opacity:.5;pointer-events:none">Save draft</a><a class="btn btn-primary"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Publish to course</a></div>
+ </section>
+</div>
+
+<div class="pagehead" style="margin-bottom:16px"><div><span class="eyebrow">Moodle quiz</span><h2 style="margin-top:6px">Add questions to Quiz 4 — Transformers</h2><p>Written straight into Moodle's question bank after a preview and your confirm — after this the quiz can be attempted.</p></div>
+ <div class="row"><div class="input sm" style="width:400px;white-space:nowrap"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg><span style="flex:1">Quiz 4 — Transformers · Week 4 · 0 attempts</span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div></div></div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:start">
+ <section class="card">
+  <div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg> Question composer</h3><span class="small muted">Question 3 of 3 staged</span></div>
+  <span class="lbl2" style="margin-top:0">Question type</span>
+  <div class="seg"><a class="on">Multiple choice</a><a>True / False</a><a>Short answer</a><a>Numerical</a><a>Essay</a></div>
+  <div style="display:grid;grid-template-columns:1fr 110px;gap:12px"><div><span class="lbl2">Question name</span><div class="input sm">Turns ratio from voltages</div></div><div><span class="lbl2">Marks</span><div class="input sm">2</div></div></div>
+  <span class="lbl2">Question</span><div class="input" style="height:76px;align-items:flex-start;padding-top:12px">A transformer steps 11 kV down to 415 V. What is its turns ratio N₁ : N₂ (to the nearest whole number)?</div>
+  <span class="lbl2">Answers <span class="muted" style="font-weight:400">· exactly one correct</span></span>
+  <div class="ans"><span class="radio on"></span><div class="input sm" style="flex:1">27 : 1</div><span class="badge ok">Correct</span></div>
+  <div class="ans"><span class="radio"></span><div class="input sm" style="flex:1">1 : 27</div><a class="iconbtn" style="width:32px;height:32px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></a></div>
+  <div class="ans"><span class="radio"></span><div class="input sm focus" style="flex:1"><span class="ph">Answer 3</span></div><a class="iconbtn" style="width:32px;height:32px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></a></div>
+  <div class="callout bad" style="margin:4px 0 10px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><span>Every answer needs text. Answer 3 is empty — fill it or remove it.</span></div>
+  <a class="link" style="font-size:12.5px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Add an answer</a>
+  <div class="row" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)"><span class="small muted" style="flex:1">The form mirrors Moodle's own rules so problems show here, not as a failed write. Moodle still checks everything.</span><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Add another</a><a class="btn btn-primary">Review 3 questions</a></div>
+ </section>
+
+ <section class="stack">
+  <div class="card"><div class="card-h"><h3>Staged for Quiz 4</h3><span class="badge">3 questions · 4 marks</span></div>
+   <div class="staged"><span class="badge">1</span><div style="flex:1"><b>Ideal transformer voltage ratio</b><span class="muted">Multiple choice · 1 mark</span></div><a class="small muted">Remove</a></div>
+   <div class="staged"><span class="badge">2</span><div style="flex:1"><b>Open-circuit test measures</b><span class="muted">True / False · 1 mark</span></div><a class="small muted">Remove</a></div>
+   <div class="staged" style="border-color:var(--red-100);background:var(--red-50)"><span class="badge red">3</span><div style="flex:1"><b>Turns ratio from voltages</b><span class="muted">Multiple choice · 2 marks · editing</span></div></div>
+  </div>
+
+  <div class="dlg"><span class="tag">Preview · step 2 of 3</span><h3 style="margin-top:6px">Add 3 questions to “Quiz 4 — Transformers”</h3>
+   <p class="small muted">Nothing has changed yet — this happens only when you confirm.</p>
+   <dl class="kv"><dt>Course</dt><dd>EM-210 · Electrical Machines</dd><dt>Quiz</dt><dd>Quiz 4 — Transformers (Week 4)</dd><dt>Slots</dt><dd>3 now → 6 after</dd><dt>Question bank</dt><dd>3 new questions in “Default for Quiz 4”</dd></dl>
+   <div class="chk"><span class="okc"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg></span> Moodle says you may edit this quiz</div>
+   <div class="chk"><span class="okc"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg></span> No attempts yet — slots can change safely</div>
+   <div class="row" style="justify-content:flex-end;margin-top:12px"><a class="btn btn-ghost btn-sm">Cancel</a><a class="btn btn-primary btn-sm">Yes, add them</a></div></div>
+
+  <div class="card"><div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg> Remove a question</h3><span class="small muted">by question number</span></div>
+   <div class="row" style="align-items:flex-end"><div style="width:120px"><span class="lbl2" style="margin-top:0">Question number</span><div class="input sm">2</div></div><a class="btn btn-ghost btn-sm" style="margin-bottom:3px">Review removal</a></div>
+   <p class="small muted" style="margin:8px 0 12px">Moodle can't list a quiz's questions without an attempt, so the next screen names the question at this position before anything is removed.</p>
+   <div class="callout warn"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><span>Removing: <b>What does the open-circuit test measure?</b> (question 2 of 3). Confirm only if that is the one you mean.</span></div>
+   <div class="callout bad" style="margin-top:8px"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg><span><b>Quiz 3 — DC motors</b> has 44 attempts, so its questions can no longer be removed from here.</span></div>
+  </div>
+ </section>
+</div>
+</div></main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

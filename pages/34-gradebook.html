@@ -1,0 +1,122 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gradebook · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4">
+<style>
+ .table th { white-space:nowrap; }
+ .fresh { display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:12px 16px; margin-bottom:20px; box-shadow:var(--shadow-sm); font-size:13px; }
+ .fresh .dot { color:var(--ok); box-shadow:0 0 0 4px var(--ok-50); }
+ .gb { width:100%; border-collapse:separate; border-spacing:0; font-size:13px; }
+ .gb th { text-align:center; font-weight:600; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.04em; padding:10px 8px; background:var(--canvas); border-bottom:1px solid var(--line); white-space:nowrap; }
+ .gb th small { display:block; text-transform:none; letter-spacing:0; font-weight:500; font-size:11px; }
+ .gb th:first-child { text-align:left; border-radius:10px 0 0 0; padding-left:14px; }
+ .gb th:last-child { border-radius:0 10px 0 0; }
+ .gb td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:center; vertical-align:middle; }
+ .gb td:first-child { text-align:left; padding-left:14px; }
+ .gb td.tot { background:#FAFAFB; font-weight:700; color:var(--ink); }
+ .gb th.tot { background:#EEEFF2; color:var(--ink); }
+ .gb tr:hover td { background:#FBFBFC; }
+ .cell { display:inline-flex; align-items:center; gap:4px; min-width:58px; justify-content:center; padding:4px 8px; border-radius:8px; font-weight:600; color:var(--ink); }
+ .cell.ns { color:var(--muted); font-weight:500; font-size:12px; }
+ .cell.pm { background:var(--warn-50); color:#9A6200; font-size:11.5px; }
+ .cell.ex { color:var(--muted); text-decoration:line-through; }
+ .cell.ov { background:var(--violet-50); color:var(--violet); }
+ .cell.un { border:1px dashed #E8A3A8; color:var(--red-600); font-size:11.5px; font-weight:500; }
+ .cell.lk { color:var(--ink-2); }
+ .cell.lk svg { color:var(--muted); }
+ .cell.ed { border:2px solid var(--red); box-shadow:0 0 0 4px rgba(232,52,63,.12); background:#fff; padding:2px 6px; }
+ .pencil { opacity:.35; color:var(--muted); }
+ .legend { display:flex; flex-wrap:wrap; gap:8px 16px; font-size:12px; color:var(--ink-2); }
+ .legend span { display:inline-flex; gap:6px; align-items:center; }
+ .tag { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+ .dlg { border:1px solid var(--line); border-top:4px solid var(--red); border-radius:var(--r-lg); box-shadow:var(--shadow-lg); background:#fff; padding:20px; }
+ .ba { display:grid; grid-template-columns:1fr 30px 1fr; align-items:center; gap:8px; margin:14px 0; }
+ .ba div { border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; }
+ .ba b { display:block; font-family:var(--font-display); font-size:24px; color:var(--ink); }
+ .ba .after { border-color:var(--ok); background:var(--ok-50); }
+ .chk { display:flex; gap:8px; align-items:center; font-size:12.5px; padding:5px 0; }
+ .callout { border-radius:12px; padding:12px 14px; display:flex; gap:10px; align-items:flex-start; font-size:12.5px; }
+ .callout.ok { background:var(--ok-50); color:#14704A; }
+ .callout.warn { background:var(--warn-50); color:#7A4E00; }
+ .callout.bad { background:var(--red-50); color:var(--red-800); }
+ .callout.info { background:var(--info-50); color:#1D3F91; }
+ .callout.neutral { background:var(--canvas); color:var(--ink-2); }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
+  <button class="iconbtn navtoggle" aria-label="Menu" data-toggle-nav><svg class="i " viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="02-student-dashboard.html"><img src="../assets/htu-wordmark.png" alt="HTU"><div class="sub"><b>eLearning</b></div></a>
+  <nav class="mainnav"><a href="11-teacher-dashboard.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a><a href="11-teacher-dashboard.html" class="on"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg>My teaching</a><a href="12-course-reports.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v-4M12 15V8M17 15v-7"/></svg>Reports</a><a href="13-what-students-ask.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg>What students ask</a></nav>
+  <div class="mast-actions">
+    
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></span>
+    <a class="me" href="17-teacher-profile.html"><span class="avatar sm alt">OM</span><span><b>Dr. Omar</b><span>Lecturer</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div></div></header>
+<div class="sectionbar"><div class="wrap"><span class="home"><svg class="i " viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><div class="crumbs">My teaching <span>/</span> <b>EM-210 · Electrical Machines</b></div><div class="spacer"></div><nav style="justify-content:flex-end;flex:none"><a href="04-course-page.html" class="" style="white-space:nowrap">Course</a><a href="16-student-in-course.html" class="" style="white-space:nowrap">Participants</a><a href="34-gradebook.html" class="on" style="white-space:nowrap">Gradebook</a><a href="33-course-publish.html" class="" style="white-space:nowrap">Versions</a><a href="12-course-reports.html" class="" style="white-space:nowrap">Reports</a><a href="13-what-students-ask.html" class="" style="white-space:nowrap">What students ask</a></nav></div></div>
+<main class="page"><div class="wrap">
+<div class="pagehead"><div><span class="eyebrow">Gradebook · EM-210</span><h1 style="margin-top:6px">Gradebook</h1><p>Grades read live from Moodle as you. Moodle is the calculator — nothing here computes a second total.</p></div>
+ <div class="row"><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export</a><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Add gradebook column</a><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Grader report in Moodle</a></div></div>
+
+<div class="fresh"><span class="dot"></span><span><b style="color:var(--ink)">Live from Moodle at 12:04.</b> Moodle remains the grade calculator.</span><span class="badge">read 2 min ago</span><span class="spacer"></span><span class="small muted">Lab report 2 column re-read after your edit · 12:06</span><a class="btn btn-ghost btn-sm"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3v5h-5"/></svg> Read again</a></div>
+
+<div class="grid g4" style="margin-bottom:22px">
+ <div class="kpi"><span class="ico b"><svg class="i " viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></span><div><div class="lbl">Students</div><div class="val">48 <small>1 suspended</small></div></div></div>
+ <div class="kpi"><span class="ico v"><svg class="i " viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></span><div><div class="lbl">Grade items</div><div class="val">6 <small>+ course total</small></div></div></div>
+ <div class="kpi"><span class="ico o"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3 2"/></svg></span><div><div class="lbl">Awaiting your marking</div><div class="val">11 <small>Lab report 2</small></div></div></div>
+ <div class="kpi"><span class="ico"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg></span><div><div class="lbl">Could not be read</div><div class="val">2 <small>cells — not counted as 0</small></div></div></div>
+</div>
+
+<section class="card" style="margin-bottom:24px;padding:18px">
+ <div class="card-h"><div class="row" style="gap:10px"><div class="search" style="width:280px;background:#fff"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input placeholder="Find a student"></div><div class="seg"><a class="on">All 48</a><a>Awaiting marking</a><a>Not submitted</a></div></div><span class="small muted">Showing 1–8 of 48 · <a class="link" style="font-size:12px">Next</a></span></div>
+ <table class="gb">
+  <tr><th>Student</th><th>Quiz 1<small>/ 10</small></th><th>Quiz 2<small>/ 10</small></th><th>Quiz 3<small>/ 10</small></th><th>Lab report 1<small>/ 20</small></th><th>Lab report 2<small>/ 20</small></th><th>Midterm <svg class="i i-sm" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg><small>/ 30</small></th><th class="tot">Course total<small>Moodle · %</small></th></tr>
+  <tr><td><span class="row"><span class="avatar xs">LH</span><b style="color:var(--ink)">Layla Haddad</b></span></td><td><span class="cell">9.00</span></td><td><span class="cell">8.50</span></td><td><span class="cell">9.00</span></td><td><span class="cell">18.00</span></td><td><span class="cell ed">17.00 <svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg></span></td><td><span class="cell lk">26.00</span></td><td class="tot">88.4%</td></tr>
+  <tr><td><span class="row"><span class="avatar xs alt">YA</span><b style="color:var(--ink)">Yousef Ali</b></span></td><td><span class="cell">6.00</span></td><td><span class="cell ns">Not submitted</span></td><td><span class="cell">5.50</span></td><td><span class="cell">12.00</span></td><td><span class="cell ns">Not submitted</span></td><td><span class="cell lk">14.50</span></td><td class="tot">47.1%</td></tr>
+  <tr><td><span class="row"><span class="avatar xs alt2">DS</span><b style="color:var(--ink)">Dana Saleh</b></span></td><td><span class="cell">9.50</span></td><td><span class="cell">7.00</span></td><td><span class="cell">4.00</span></td><td><span class="cell">16.00</span></td><td><span class="cell pm">Awaiting marking</span></td><td><span class="cell lk">21.00</span></td><td class="tot">71.0%</td></tr>
+  <tr><td><span class="row"><span class="avatar xs alt3">MH</span><b style="color:var(--ink)">Mai Hijazi</b></span></td><td><span class="cell">10.00</span></td><td><span class="cell">9.00</span></td><td><span class="cell">9.50</span></td><td><span class="cell ov" title="Set by teacher">19.00 •</span></td><td><span class="cell pm">Awaiting marking</span></td><td><span class="cell lk">28.50</span></td><td class="tot">94.2%</td></tr>
+  <tr><td><span class="row"><span class="avatar xs">SH</span><b style="color:var(--ink)">Sally Hazeem</b></span></td><td><span class="cell">7.50</span></td><td><span class="cell">8.00</span></td><td><span class="cell ex" title="Excluded from the total">6.00</span></td><td><span class="cell">15.50</span></td><td><span class="cell">14.00</span></td><td><span class="cell lk">22.00</span></td><td class="tot">74.6%</td></tr>
+  <tr><td><span class="row"><span class="avatar xs alt">NZ</span><b style="color:var(--ink)">Nour Zahran</b></span></td><td><span class="cell">8.00</span></td><td><span class="cell un">Could not be read</span></td><td><span class="cell">7.50</span></td><td><span class="cell">17.00</span></td><td><span class="cell pm">Awaiting marking</span></td><td><span class="cell lk">24.00</span></td><td class="tot"><span class="badge">No information</span></td></tr>
+  <tr><td><span class="row"><span class="avatar xs alt3">KT</span><b style="color:var(--ink)">Khaled Tamimi</b></span></td><td><span class="cell">5.00</span></td><td><span class="cell">6.50</span></td><td><span class="cell ns">Not submitted</span></td><td><span class="cell un">Could not be read</span></td><td><span class="cell ns">Not submitted</span></td><td><span class="cell lk">12.00</span></td><td class="tot"><span class="badge">No information</span></td></tr>
+  <tr style="opacity:.6"><td><span class="row"><span class="avatar xs alt2">SM</span><b style="color:var(--ink)">Sara Mansour</b> <span class="badge warn">Suspended</span></span></td><td><span class="cell">7.00</span></td><td><span class="cell ns">—</span></td><td><span class="cell ns">—</span></td><td><span class="cell ns">—</span></td><td><span class="cell ns">—</span></td><td><span class="cell ns">—</span></td><td class="tot">—</td></tr>
+ </table>
+ <div class="legend" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+  <span><span class="cell" style="min-width:0;padding:1px 6px">8.50</span> Graded</span>
+  <span><span class="cell ns" style="min-width:0;padding:1px 6px">Not submitted</span></span>
+  <span><span class="cell pm" style="min-width:0;padding:1px 6px">Awaiting marking</span> Submitted</span>
+  <span><span class="cell ex" style="min-width:0;padding:1px 6px">6.00</span> Excluded from the total</span>
+  <span><span class="cell ov" style="min-width:0;padding:1px 6px">19.00 •</span> Set by teacher</span>
+  <span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Locked in Moodle — read-only</span>
+  <span><span class="cell un" style="min-width:0;padding:1px 6px">Could not be read</span> never shown as 0</span>
+  <span><span class="badge">No information</span> Moodle returned no total</span>
+ </div>
+</section>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start">
+ <div class="dlg"><span class="tag">Preview · grade change</span><h3 style="margin-top:6px">Change Layla Haddad's grade for Lab report 2</h3>
+  <p class="small muted">Nothing has changed yet — this happens only when you confirm.</p>
+  <div class="ba"><div><span class="small muted">Now in Moodle</span><b>15.00</b><span class="small muted">/ 20</span></div><span style="color:var(--muted)"><svg class="i " viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div class="after"><span class="small" style="color:#14704A">After</span><b>17.00</b><span class="small" style="color:#14704A">/ 20 · set by teacher</span></div></div>
+  <div class="chk"><span style="color:var(--ok)"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg></span> Moodle says you may mark in EM-210</div>
+  <div class="chk"><span style="color:var(--ok)"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg></span> Column is not locked, hidden or calculated</div>
+  <div class="chk"><span style="color:var(--muted)"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 8h.01"/></svg></span> Moodle recalculates the course total itself</div>
+  <div class="row" style="justify-content:flex-end;margin-top:12px"><a class="btn btn-ghost btn-sm">Cancel</a><a class="btn btn-primary btn-sm">Yes, change it</a></div></div>
+
+ <div class="card"><span class="tag">After you confirm</span><h3 style="margin:6px 0 10px">Done — applied in Moodle.</h3>
+  <div class="callout ok"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.3 2.7 2.7L16 9.6"/></svg><span>Re-read live: Layla Haddad · Lab report 2 = <b>17.00</b>. Course total is now <b>88.4%</b> (was 86.9%) — Moodle's figure.</span></div>
+  <p class="small muted" style="margin-top:10px">Logged as Dr. Omar Mansour · 12:06, 13 Oct · <a class="link" href="35-audit-trail.html" style="font-size:12px">Audit log</a></p>
+  <div class="callout warn" style="margin-top:12px"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3 2"/></svg><span><b>May be out of date.</b> When a read is older than its freshness window, the cells say so until they are read again — a stale copy is never shown as current.</span></div></div>
+
+ <div class="card"><span class="tag">When marking isn't offered</span>
+  <div class="callout bad" style="margin-top:10px"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg><span><b>CS-201 · Data Structures</b> — You can read these grades but not change them. Marking in this course has not been granted to you.</span></div>
+  <div class="callout neutral" style="margin-top:10px"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg><span><b>DB-101 · Database Systems</b> — Marking is not offered here: Moodle did not answer whether you may mark in this course, and nothing is assumed allowed or denied.</span></div>
+  <div class="callout info" style="margin-top:10px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><span><b>Moodle unreachable</b> — Grades are read live. Rather than show a possibly-stale copy, the gradebook waits and offers “Try again”.</span></div></div>
+</div>
+</div></main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

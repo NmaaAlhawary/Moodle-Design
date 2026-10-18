@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course management · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4">
+<style>
+ .table th { white-space:nowrap; }
+ .live { display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); }
+ .live .dot { color:var(--ok); box-shadow:0 0 0 4px var(--ok-50); }
+ .toolbar { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+ .cm-stats { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+ .cm-stats div { padding:10px 12px; border-right:1px solid var(--line); }
+ .cm-stats div:last-child { border-right:0; }
+ .cm-stats b { display:block; font-family:var(--font-display); font-size:18px; color:var(--ink); line-height:1.2; }
+ .cm-stats span { font-size:11.5px; color:var(--muted); }
+ .ccard .foot { display:flex; gap:8px; align-items:center; padding-top:4px; }
+ .ccard .foot .spacer + a { color:var(--muted); }
+ .refusal { font-size:12px; color:var(--red-600); background:var(--red-50); border-radius:10px; padding:8px 10px; display:flex; gap:8px; align-items:flex-start; }
+ .mini-pipe { display:flex; flex-direction:column; gap:0; }
+ .mini-pipe div { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px dashed var(--line); font-size:12.5px; }
+ .mini-pipe div:last-child { border:0; }
+ .mini-pipe i { font-style:normal; width:22px; height:22px; border-radius:50%; background:var(--red-50); color:var(--red-600); display:grid; place-items:center; font-size:11px; font-weight:700; flex:none; }
+ .mini-pipe b { color:var(--ink); display:block; font-size:12.5px; }
+ .wlog { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); align-items:flex-start; }
+ .wlog:last-of-type { border:0; }
+ .wlog .n { width:28px; height:28px; border-radius:9px; display:grid; place-items:center; flex:none; background:var(--ok-50); color:var(--ok); }
+ .wlog .n.f { background:var(--red-50); color:var(--red-600); }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div><header class="masthead"><div class="wrap">
+  <button class="iconbtn navtoggle" aria-label="Menu" data-toggle-nav><svg class="i " viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="02-student-dashboard.html"><img src="../assets/htu-wordmark.png" alt="HTU"><div class="sub"><b>eLearning</b></div></a>
+  <nav class="mainnav"><a href="11-teacher-dashboard.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a><a href="11-teacher-dashboard.html" class="on"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg>My teaching</a><a href="12-course-reports.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v-4M12 15V8M17 15v-7"/></svg>Reports</a><a href="13-what-students-ask.html" class=""><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg>What students ask</a></nav>
+  <div class="mast-actions">
+    
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></span>
+    <span class="iconbtn"><svg class="i " viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></span>
+    <a class="me" href="17-teacher-profile.html"><span class="avatar sm alt">OM</span><span><b>Dr. Omar</b><span>Lecturer</span></span><svg class="i i-sm" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div></div></header>
+<div class="sectionbar"><div class="wrap"><span class="home"><svg class="i " viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><div class="crumbs">My teaching <span>/</span> <b>Course workspace</b></div><div class="spacer"></div><nav style="justify-content:flex-end;flex:none"><a href="30-teacher-courses.html" class="on" style="white-space:nowrap">Courses</a><a href="31-quiz-studio.html" class="" style="white-space:nowrap">Quiz studio</a><a href="32-csv-import.html" class="" style="white-space:nowrap">Import from spreadsheet</a><a href="35-audit-trail.html" class="" style="white-space:nowrap">Audit log</a></nav></div></div>
+<main class="page"><div class="wrap">
+<div class="pagehead"><div><span class="eyebrow">My teaching · Course workspace</span><h1 style="margin-top:6px">Course management</h1><p>Every course you can edit in Moodle, with what each one is missing.</p></div>
+ <div class="row"><a class="btn btn-ghost"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Import a backup (.mbz)</a><a class="btn btn-ghost" href="32-csv-import.html"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9 4v16"/></svg> Build from a spreadsheet</a><a class="btn btn-primary"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Create course in Moodle</a></div></div>
+
+<div class="grid g4" style="margin-bottom:22px">
+ <div class="kpi"><span class="ico"><svg class="i " viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/></svg></span><div><div class="lbl">Courses in Moodle</div><div class="val">5</div></div></div>
+ <div class="kpi"><span class="ico v"><svg class="i " viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></span><div><div class="lbl">Activities</div><div class="val">163</div></div></div>
+ <div class="kpi"><span class="ico b"><svg class="i " viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></span><div><div class="lbl">Enrolled students</div><div class="val">213</div></div></div>
+ <div class="kpi"><span class="ico o"><svg class="i " viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span><div><div class="lbl">Need attention</div><div class="val">2 <small>of 5</small></div></div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start">
+<section>
+ <div class="card" style="padding:0 22px;margin-bottom:18px"><div class="tabs" style="border:0"><a class="on">Live in Moodle <span class="badge">5</span></a><a>Local drafts <span class="badge">2</span></a></div></div>
+ <div class="toolbar">
+  <div class="search" style="width:360px;background:#fff"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input placeholder="Search by name, shortname or idnumber"></div>
+  <span class="live"><span class="dot"></span>Live from Moodle · read 12:04, 13 Oct</span>
+  <div class="spacer"></div>
+  <div class="seg"><a class="on"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Cards</a><a><svg class="i i-sm" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg> Table</a></div>
+ </div>
+
+ <div class="grid g3">
+  <article class="ccard"><div class="cover cv1"><div class="pattern"></div><span class="code">EM-210</span><span class="ttl" style="position:relative">Electrical Machines</span></div>
+   <div class="body"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge ok"><span class="dot"></span> Available</span><span class="badge">Weekly format</span></div>
+    <div class="cm-stats"><div><b>16</b><span>Sections</span></div><div><b>64</b><span>Activities</span></div><div><b>48</b><span>Students</span></div></div>
+    <div class="small muted">Workspace copy has 4 unpublished changes · <a class="link" href="33-course-publish.html" style="font-size:12px">Review</a></div>
+    <div class="foot"><a class="btn btn-ghost btn-sm" href="04-course-page.html">Open</a><a class="btn btn-primary btn-sm">Manage</a><span class="spacer"></span><a class="small" style="display:inline-flex;gap:4px;align-items:center"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Moodle</a></div></div></article>
+
+  <article class="ccard"><div class="cover cv3"><div class="pattern"></div><span class="code">ECD-110</span><span class="ttl" style="position:relative">Electronic Circuits &amp; Devices</span></div>
+   <div class="body"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge ok"><span class="dot"></span> Available</span><span class="badge">Topics format</span></div>
+    <div class="cm-stats"><div><b>12</b><span>Sections</span></div><div><b>41</b><span>Activities</span></div><div><b>62</b><span>Students</span></div></div>
+    <div class="small muted">Matches its last published version.</div>
+    <div class="foot"><a class="btn btn-ghost btn-sm">Open</a><a class="btn btn-primary btn-sm">Manage</a><span class="spacer"></span><a class="small" style="display:inline-flex;gap:4px;align-items:center"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Moodle</a></div></div></article>
+
+  <article class="ccard"><div class="cover cv7"><div class="pattern"></div><span class="code">EEP-120</span><span class="ttl" style="position:relative">Electrical &amp; Electronic Principles</span></div>
+   <div class="body"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge" title="Moodle did not report this course's visibility"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg> Visibility not reported</span></div>
+    <div class="cm-stats"><div><b>10</b><span>Sections</span></div><div><b>33</b><span>Activities</span></div><div><b>35</b><span>Students</span></div></div>
+    <div class="small muted">Unknown is shown as unknown — not as hidden, and not as a problem.</div>
+    <div class="foot"><a class="btn btn-ghost btn-sm">Open</a><a class="btn btn-primary btn-sm">Manage</a><span class="spacer"></span><a class="small" style="display:inline-flex;gap:4px;align-items:center"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Moodle</a></div></div></article>
+
+  <article class="ccard"><div class="cover cv6"><div class="pattern"></div><span class="code">CS-201</span><span class="ttl" style="position:relative">Data Structures</span></div>
+   <div class="body"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge ok"><span class="dot"></span> Available</span><span class="badge red"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Editing refused by Moodle</span></div>
+    <div class="cm-stats"><div><b>14</b><span>Sections</span></div><div><b>25</b><span>Activities</span></div><div><b>41</b><span>Students</span></div></div>
+    <div class="refusal"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg><span>Moodle's answer for you on this course: <b>manage activities — not granted</b>. You are enrolled as a non-editing teacher. Ask the course owner to change it in Moodle.</span></div>
+    <div class="foot"><a class="btn btn-ghost btn-sm">Open</a><span class="spacer"></span><a class="small" style="display:inline-flex;gap:4px;align-items:center"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Moodle</a></div></div></article>
+
+  <article class="ccard"><div class="cover cv4"><div class="pattern"></div><span class="code">DB-101</span><span class="ttl" style="position:relative">Database Systems</span></div>
+   <div class="body"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge warn"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 6.1A10 10 0 0 1 12 6c5 0 9 4.5 10 6-.4.7-1.4 2-2.8 3.3M6.6 6.6C4.5 8 3 10.2 2 12c1 1.5 5 6 10 6 1.8 0 3.4-.6 4.8-1.4"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg> Hidden from students</span><span class="badge">No activities</span></div>
+    <div class="cm-stats"><div><b>4</b><span>Sections</span></div><div><b>0</b><span>Activities</span></div><div><b>27</b><span>Students</span></div></div>
+    <div class="small muted">Shell created 2 Oct. Content is waiting in your workspace (v3).</div>
+    <div class="foot"><a class="btn btn-ghost btn-sm">Open</a><a class="btn btn-primary btn-sm">Manage</a><span class="spacer"></span><a class="small" style="display:inline-flex;gap:4px;align-items:center"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg> Moodle</a></div></div></article>
+
+  <div class="state" style="flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:100%">
+   <span class="ico"><svg class="i " viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><b style="color:var(--ink)">Start another course</b><span class="small muted" style="max-width:220px">Create an empty course in Moodle, restore a .mbz backup, or build one from a spreadsheet. Each one is previewed before anything is written.</span>
+   <div class="row" style="gap:8px;justify-content:center"><a class="btn btn-soft btn-sm">Create</a><a class="btn btn-ghost btn-sm">Import</a></div></div>
+ </div>
+
+ <section class="card" style="margin-top:24px">
+  <div class="card-h"><div><h2>Not published yet</h2><p class="small muted" style="margin-top:4px">Courses you built here that have not gone into Moodle. Nothing below is visible to students.</p></div><a class="link" href="32-csv-import.html">Build from a spreadsheet <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <table class="table"><tr><th>Course</th><th>Built from</th><th>Contents</th><th>Last edited</th><th></th></tr>
+   <tr><td><b>EM-210 Lab companion</b><div class="small muted">Workspace draft · never published</div></td><td><span class="badge"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9 4v16"/></svg> em210-labs.xlsx</span></td><td class="small">8 sections, 31 activities · <span style="color:#9A6200">4 placeholders</span></td><td class="small muted">Today, 11:42</td><td style="text-align:right;white-space:nowrap"><a class="btn btn-ghost btn-sm">Open the builder</a> <a class="btn btn-soft btn-sm">Publish to Moodle</a></td></tr>
+   <tr><td><b>DB-101 Database Systems</b><div class="small muted">Version 3 · linked to Moodle course DB-101</div></td><td><span class="badge"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> db101-2025.mbz</span></td><td class="small">14 sections, 52 activities</td><td class="small muted">Fri 9 Oct</td><td style="text-align:right;white-space:nowrap"><a class="btn btn-ghost btn-sm">Open the builder</a> <a class="btn btn-soft btn-sm">Publish to Moodle</a></td></tr>
+  </table>
+ </section>
+
+ <section class="card" style="margin-top:20px">
+  <div class="card-h"><div><h2>Published, and editable here</h2><p class="small muted" style="margin-top:4px">Already in Moodle. Send your changes when you are ready — you will see exactly what will change there, and what will be kept, first.</p></div></div>
+  <table class="table"><tr><th>Course</th><th>Moodle course</th><th>Since last publish</th><th>Last published</th><th></th></tr>
+   <tr><td><b>Electrical Machines</b><div class="small muted">Workspace · version 4</div></td><td><span class="badge">EM-210</span></td><td><span class="badge warn">4 changes waiting</span></td><td class="small muted">6 Oct, 09:14 · by you</td><td style="text-align:right"><a class="btn btn-primary btn-sm" href="33-course-publish.html">Send changes to Moodle <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></td></tr>
+   <tr><td><b>Electronic Circuits &amp; Devices</b><div class="small muted">Workspace · version 2</div></td><td><span class="badge">ECD-110</span></td><td><span class="badge ok"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> Up to date</span></td><td class="small muted">21 Sep, 16:30 · by you</td><td style="text-align:right"><a class="btn btn-ghost btn-sm">Open</a></td></tr>
+  </table>
+ </section>
+</section>
+
+<aside class="stack">
+ <div class="card"><div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg> Your recent writes</h3><a class="link" href="35-audit-trail.html">Audit log</a></div>
+  <div class="wlog"><span class="n"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div class="small"><b style="color:var(--ink)">Changed Layla Haddad's grade</b> for Lab report 2 in EM-210 — 15 → 17<div class="muted">Today 12:06 · re-read live ✓</div></div></div>
+  <div class="wlog"><span class="n"><svg class="i i-sm" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><div class="small"><b style="color:var(--ink)">Added 3 questions</b> to Quiz 4 — Transformers<div class="muted">Today 10:38</div></div></div>
+  <div class="wlog"><span class="n f"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span><div class="small"><b style="color:var(--ink)">Hide “Week 3 forum”</b> in CS-201 — refused<div class="muted">Yesterday 15:02 · Moodle: not permitted</div></div></div>
+ </div>
+ <div class="card"><div class="card-h"><h3><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg> How a change reaches Moodle</h3></div>
+  <div class="mini-pipe">
+   <div><i>1</i><span><b>Preview</b><span class="muted">The change is described. Nothing is written.</span></span></div>
+   <div><i>2</i><span><b>Moodle decides</b><span class="muted">Your permission is Moodle's answer — never guessed here.</span></span></div>
+   <div><i>3</i><span><b>Impact counted</b><span class="muted">Deletes state what they destroy, counted live.</span></span></div>
+   <div><i>4</i><span><b>You confirm, once</b><span class="muted">Then it is recorded in the audit log.</span></span></div>
+   <div><i>5</i><span><b>Live re-read</b><span class="muted">The screen shows what Moodle really holds now.</span></span></div>
+  </div></div>
+ <div class="card tint"><div class="row" style="align-items:flex-start"><svg class="i " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 8h.01"/></svg><span class="small">Totals above are sums over what Moodle returned. While a read is in flight they show “—”, never 0.</span></div></div>
+</aside>
+</div>
+</div></main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>

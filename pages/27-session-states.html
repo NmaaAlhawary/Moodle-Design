@@ -1,0 +1,110 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session states · HTU eLearning</title><link rel="stylesheet" href="../assets/htu.css?v=4"><style>
+  .ss-grid { max-width: 1060px; margin: 0 auto; }
+  .ss-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .ss-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 20px; border-bottom: 1px solid var(--line); background: #FCFCFD; }
+  .ss-top code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink-2); background: var(--canvas); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; }
+  .ss-body { padding: 34px 40px 36px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; flex: 1; }
+  .ss-body h2 { font-size: 21px; }
+  .ss-body p { max-width: 400px; }
+  .ss-mark { width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center; background: var(--red-50); color: var(--red); margin-bottom: 4px; position: relative; }
+  .ss-mark img { width: 34px; height: 34px; }
+  .ss-mark.warn { background: var(--warn-50); color: var(--warn); }
+  .ss-mark.info { background: var(--info-50); color: var(--info); }
+  .ss-mark.muted { background: var(--canvas); color: var(--muted); }
+  .ss-spin { position: absolute; inset: -6px; border-radius: 22px; border: 3px solid var(--red-100); border-top-color: var(--red); animation: ss-rot 1s linear infinite; }
+  @keyframes ss-rot { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .ss-spin { animation: none; } }
+  .ss-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  .ss-who { display: flex; align-items: center; gap: 12px; text-align: left; border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; width: 100%; max-width: 380px; }
+  .ss-who b { display: block; color: var(--ink); font-size: 13.5px; line-height: 1.2; }
+  .ss-who span { font-size: 12px; color: var(--muted); }
+  .ss-alert { display: flex; gap: 8px; align-items: flex-start; text-align: left; font-size: 12.5px; font-weight: 500; color: var(--red-600); background: var(--red-50); border-radius: 10px; padding: 10px 12px; max-width: 400px; }
+  .ss-sub { width: 100%; border-top: 1px dashed #D9DBE1; margin-top: 14px; padding-top: 16px; text-align: left; }
+  .ss-steps { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .ss-steps i { width: 6px; height: 6px; border-radius: 50%; background: var(--red); display: inline-block; font-style: normal; }
+  .ss-steps i.off { background: #D9DBE1; }
+  .ss-mark.round { border-radius: 50%; background: #fff; box-shadow: var(--shadow-sm); }
+  .ss-mark.round .ss-spin { border-radius: 50%; }
+  .ss-mark.round img { width: 40px; height: 40px; }
+</style></head>
+<body><div class="utility"><div class="wrap">
+  <div class="contact"><span><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</span><span><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +(962) 6 580 8787</span><span>العربية</span></div>
+  <div class="portals"><a class="">EMPLOYEE PORTAL</a><a class="">STUDENTS PORTAL</a><a class="on">E-LEARNING</a><a class="">PEARSON SUPPORT HUB</a></div></div></div>
+<main style="background:linear-gradient(180deg,#fff, #F7F7F9)">
+  <div class="wrap" style="padding:40px 0 72px">
+    <div style="display:flex;justify-content:center;margin-bottom:30px"><img src="../assets/htu-wordmark.png" style="height:58px" alt="HTU"></div>
+    <div style="text-align:center;margin-bottom:32px">
+      <span class="eyebrow">Sign-in edge states</span>
+      <h1 style="font-size:32px;margin:8px 0 8px">When your session needs a moment</h1>
+      <p class="muted" style="max-width:620px;margin:0 auto">HTU eLearning and Moodle each keep their own session. These four screens appear when the two need to agree — each says plainly what happened and offers one clear next step.</p>
+    </div>
+
+    <div class="grid g2 ss-grid">
+      <!-- 1 · Restoring -->
+      <section class="card ss-card">
+        <div class="ss-top"><span class="row" style="gap:8px"><span class="badge info"><span class="dot"></span> In progress</span><b style="color:var(--ink);font-size:13.5px">Restoring session</b></span><code>/app/restore</code></div>
+        <div class="ss-body">
+          <span class="ss-mark round"><span class="ss-spin"></span><img src="../assets/htu-icon-192.png" alt=""></span>
+          <h2>Restoring your secure session…</h2>
+          <p class="muted">Picking up where you left off in Moodle. This usually takes a second — you will land on <b style="color:var(--ink)">SWE 330 · Week 6 quiz</b>.</p>
+          <div class="ss-sub">
+            <div class="row" style="gap:12px;align-items:flex-start">
+              <span class="ss-mark muted" style="width:36px;height:36px;border-radius:10px;margin:0"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+              <div style="flex:1"><span class="badge" style="margin-bottom:6px">If it cannot be restored</span><b style="display:block;color:var(--ink);font-size:14px">We could not restore this Moodle session</b><p class="small muted" style="margin:4px 0 8px">Return to HTU eLearning and try again. Moodle’s login form is not used for this journey.</p><a class="link" href="02-student-dashboard.html">Return to HTU eLearning <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 · Account conflict -->
+      <section class="card ss-card">
+        <div class="ss-top"><span class="row" style="gap:8px"><span class="badge warn"><span class="dot"></span> Needs a choice</span><b style="color:var(--ink);font-size:13.5px">Account conflict</b></span><code>/app/account-conflict</code></div>
+        <div class="ss-body">
+          <span class="ss-mark warn"><svg class="i i-lg" viewBox="0 0 24 24"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg></span>
+          <span class="eyebrow">Account switch</span>
+          <h2>A different account is already active</h2>
+          <p class="muted">HTU eLearning is ready to open <b style="color:var(--ink)">Layla Haddad</b>. Continuing will end the current Moodle session on this device. You can stay with the current account instead.</p>
+          <div class="ss-who"><span class="avatar sm">LH</span><div><b>Layla Haddad</b><span>2023-0412 · Software Engineering</span></div><span class="spacer"></span><span class="badge ok">Requested</span></div>
+          <div class="ss-actions"><a class="btn btn-primary"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg> Switch Moodle account</a><a class="btn btn-ghost" href="02-student-dashboard.html">Stay signed in</a></div>
+        </div>
+      </section>
+
+      <!-- 3 · Partial logout -->
+      <section class="card ss-card">
+        <div class="ss-top"><span class="row" style="gap:8px"><span class="badge red"><span class="dot"></span> Needs attention</span><b style="color:var(--ink);font-size:13.5px">Partial sign-out</b></span><code>/app/logout-partial</code></div>
+        <div class="ss-body">
+          <span class="ss-mark"><svg class="i i-lg" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg></span>
+          <h2>Moodle sign-out needs your attention</h2>
+          <p class="muted">HTU eLearning has signed you out here, but Moodle could not confirm its session ended. On a shared device, retry before leaving.</p>
+          <div class="row" style="gap:8px;justify-content:center;font-size:12.5px"><span class="badge ok">✓ HTU eLearning · signed out</span><span class="badge warn">? Moodle · not confirmed</span></div>
+          <div class="ss-alert" role="alert"><svg class="i i-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg> Moodle is still unavailable. Please retry when the connection is restored.</div>
+          <div class="ss-actions"><a class="btn btn-primary"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Retry Moodle sign-out</a><a class="btn btn-ghost" href="01-login.html">Return to sign-in</a></div>
+        </div>
+      </section>
+
+      <!-- 4 · Auth status -->
+      <section class="card ss-card">
+        <div class="ss-top"><span class="row" style="gap:8px"><span class="badge"><span class="dot"></span> Stopped</span><b style="color:var(--ink);font-size:13.5px">Sign-in status</b></span><code>/app/auth/status</code></div>
+        <div class="ss-body">
+          <span class="ss-mark info"><svg class="i i-lg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 15h.01"/></svg></span>
+          <span class="eyebrow">HTU eLearning sign-in</span>
+          <h2>The university sign-in did not finish</h2>
+          <p class="muted">Return to the gateway and start again. If this keeps happening, ask the HTU IT team whether the eLearning connection is available.</p>
+          <div class="ss-actions"><a class="btn btn-primary" href="01-login.html">Return to sign-in <svg class="i i-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <span class="row small muted" style="gap:6px;margin-top:6px"><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> IT help desk · +962 6 580 8787</span>
+        </div>
+      </section>
+    </div>
+
+    <p class="row small muted" style="gap:6px;justify-content:center;margin-top:28px"><svg class="i i-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> HTU eLearning never asks for or stores your university password.</p>
+  </div>
+</main><footer class="footer"><div class="wrap">
+  <div class="addr"><img src="../assets/htu-wordmark.png" style="height:44px;margin-bottom:14px" alt="HTU"><h5>Future Starts Here</h5>
+    <div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> KHBP, Building 17, Amman – Jordan</div><div><svg class="i i-sm" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> +962 6 580 8787</div><div><svg class="i i-sm" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> info@htu.edu.jo</div></div>
+  <div><h5>About</h5><a>Overview</a><a>Governance</a><a>President's Message</a><a>News</a><a>Vacancies</a><a>Contact</a></div>
+  <div><h5>Quick Links</h5><a>By-laws and Regulations</a><a>Academic Calendar</a><a>Active Tenders and RFIs</a><a>Crown Prince Foundation</a><a>CAVT</a></div>
+  <div><h5>Our Newsletter</h5><span class="muted">Enter your email to get our monthly newsletter</span>
+    <div class="news"><span>Your email</span><b>Subscribe</b></div>
+    <div class="socials"><i>f</i><i>𝕏</i><i>◎</i><i>in</i><i>▶</i><i>?</i><i>⊞</i></div></div>
+</div></footer><div class="copyright">Al-Hussein Technical University 2026 © All Rights Reserved</div><script src="../assets/htu.js?v=4"></script></body></html>
