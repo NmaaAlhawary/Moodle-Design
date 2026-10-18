@@ -70,7 +70,7 @@
   function av(n, k) { return '<span class="avatar xs ' + AVC[k % 4] + '">' + initials(n) + '</span>'; }
 
   function head(title, sub, actions) {
-    return '<div class="row between" style="margin-bottom:18px;flex-wrap:wrap;gap:12px"><div><div class="eyebrow mono" style="letter-spacing:.12em">ELECTRICAL MACHINES</div><h2 style="font-size:24px;margin-top:4px">' + title + '</h2>' + (sub ? '<div class="small muted" style="margin-top:2px">' + sub + '</div>' : '') + '</div><div class="row" style="gap:8px">' + actions + '</div></div>';
+    return '<div class="row between" style="margin-bottom:18px;flex-wrap:wrap;gap:12px"><div><h2 style="font-size:24px">' + title + '</h2>' + (sub ? '<div class="small muted" style="margin-top:2px">' + sub + '</div>' : '') + '</div><div class="row" style="gap:8px">' + actions + '</div></div>';
   }
 
   /* ════════════════════════ REPORTS ════════════════════════ */
@@ -237,7 +237,7 @@
     renderRail(); renderMain();
   }
 
-  /* ════════════════════════ VIDEO (Vimeo-style analytics) ════════════════════════ */
+  /* ════════════════════════ VIDEO ENGAGEMENT ════════════════════════ */
   if (PAGE === 'video') {
     var RECS = [
       { id: 'L4', n: 'Lecture 4 — Magnetic circuits I', wk: 'Week 1', len: 2060, viewers: 46, views: 79, w: 91, fin: 38, cv: 'cv3', posted: 14, skip: null },
@@ -266,13 +266,17 @@
     var VS = { metric: 'views', range: 30, bar: 70, sort: 'w', dir: 1, open: null, group: 'all', tracked: {} };
     var METRICS = [
       ['views', 'Views', function (L) { return fmt(sum(L, 'views')); }, function (x) { return x.views; }],
-      ['uniq', 'Unique viewers', function (L) { return { 7: 31, 14: 38, 30: 43, 43: 45 }[VS.range] + '<small> / 48</small>'; }, function (x) { return x.uniq; }],
-      ['mins', 'Time watched', function (L) { var m = sum(L, 'mins'); return Math.floor(m / 60) + 'h ' + (m % 60) + 'm'; }, function (x) { return x.mins; }],
-      ['avg', 'Avg % watched', function (L) { var v = 0, n = 0; L.forEach(function (x) { if (x.views) { v += x.avg * x.views; n += x.views; } }); return (n ? Math.round(v / n) : 0) + '%'; }, function (x) { return x.views ? x.avg : null; }],
-      ['fin', 'Finishes', function (L) { return fmt(sum(L, 'fin')); }, function (x) { return x.fin; }]
+      ['uniq', 'Students reached', function (L) { return { 7: 31, 14: 38, 30: 43, 43: 45 }[VS.range] + '<small> / 48</small>'; }, function (x) { return x.uniq; }],
+      ['mins', 'Watch time', function (L) { var m = sum(L, 'mins'); return Math.floor(m / 60) + 'h ' + (m % 60) + 'm'; }, function (x) { return x.mins; }],
+      ['avg', 'Avg watched', function (L) { var v = 0, n = 0; L.forEach(function (x) { if (x.views) { v += x.avg * x.views; n += x.views; } }); return (n ? Math.round(v / n) : 0) + '%'; }, function (x) { return x.views ? x.avg : null; }],
+      ['fin', 'Finished', function (L) { return fmt(sum(L, 'fin')); }, function (x) { return x.fin; }]
     ];
     function sum(L, k) { return L.reduce(function (s, x) { return s + x[k]; }, 0); }
     function win(off) { var n = VS.range; var end = ND - off * n; return DAYS.slice(Math.max(0, end - n), end); }
+    function sub(m, L) {
+      var v = sum(L, 'views') || 1;
+      return '<span class="muted">' + ({ views: Math.round(v / L.length) + ' a day', uniq: 'watched at least one', mins: '≈ ' + (sum(L, 'mins') / 60 / 45).toFixed(1) + ' h per student', avg: 'Target 70%', fin: Math.round(sum(L, 'fin') / v * 100) + '% of views' })[m[0]] + '</span>';
+    }
     function delta(m) {
       if (VS.range === 43) return '<span class="muted">This term</span>';
       var a = win(0), b = win(1); if (!b.length) return '<span class="muted">—</span>'; var scale = VS.range / b.length;
@@ -285,9 +289,9 @@
     root.innerHTML = '<div id="vtop"></div><div id="vchart"></div><div id="vtable" style="margin-top:20px"></div><div id="vside" style="margin-top:20px"></div><div id="vheat" style="margin-top:20px"></div><div id="vnt" style="margin-top:20px"></div>';
     function renderTop() {
       var L = win(0);
-      var h = head('Video engagement', 'Like your Vimeo stats — but every viewer is a student in this course',
+      var h = head('Video engagement', '',
         '<div class="seg2" id="rng">' + [[7, '7 days'], [14, '14 days'], [30, '30 days'], [43, 'This term']].map(function (r) { return '<button data-r="' + r[0] + '" class="' + (VS.range === r[0] ? 'on' : '') + '">' + r[1] + '</button>'; }).join('') + '</div>');
-      h += '<div class="panel" style="overflow:hidden"><div class="mtabs">' + METRICS.map(function (m) { return '<button data-m="' + m[0] + '" class="' + (VS.metric === m[0] ? 'on' : '') + '"><span class="l">' + m[1] + '</span><span class="v">' + m[2](L) + '</span><span class="d">' + delta(m) + '</span></button>'; }).join('') + '</div><div id="lc" style="padding:14px 20px 18px"></div></div>';
+      h += '<div class="panel" style="overflow:hidden"><div class="mtabs">' + METRICS.map(function (m) { return '<button data-m="' + m[0] + '" class="' + (VS.metric === m[0] ? 'on' : '') + '"><span class="l">' + m[1] + '</span><span class="v">' + m[2](L) + '</span><span class="d">' + sub(m, L) + '</span></button>'; }).join('') + '</div><div id="lc" style="padding:14px 20px 18px"></div></div>';
       $('#vtop').innerHTML = h;
       lineChart();
     }
@@ -310,7 +314,7 @@
       $('#lc').innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;display:block"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E31E24" stop-opacity=".22"/><stop offset="1" stop-color="#E31E24" stop-opacity="0"/></linearGradient></defs>' + grid + xl + mk +
         '<path d="' + area + '" fill="url(#ga)"/><path d="' + line + '" fill="none" stroke="#E31E24" stroke-width="2.5" stroke-linejoin="round"/>' + dots +
         '<line id="cx" y1="' + pt + '" y2="' + (H - pb) + '" stroke="#14161C" stroke-opacity=".35" style="display:none"/><circle id="cd" r="5" fill="#E31E24" stroke="#fff" stroke-width="2" style="display:none"/><rect class="lc-hit" x="' + pl + '" y="0" width="' + (W - pl - pr) + '" height="' + H + '" fill="transparent"/></svg>' +
-        '<div class="mlegend"><span><i style="background:#E31E24"></i>' + m[1] + '</span><span><i style="background:#E31E24;border-radius:3px"></i>L4–L9 · day a lecture was posted</span></div>';
+        '<div class="mlegend"><span><i style="background:#E31E24"></i>' + m[1] + '</span><span><i style="background:#E31E24;border-radius:3px"></i>Lecture posted</span></div>';
       var svg = $('#lc svg'), hit = $('.lc-hit', svg), cx = $('#cx', svg), cd = $('#cd', svg);
       hit.addEventListener('mousemove', function (e) {
         var b = svg.getBoundingClientRect(), sx = (e.clientX - b.left) / b.width * W, i = Math.round((sx - pl) / ((W - pl - pr) / Math.max(1, L.length - 1)));
@@ -331,7 +335,7 @@
     }
     function renderTable() {
       var list = RECS.slice().sort(function (a, b) { var x = a[VS.sort], y = b[VS.sort]; return (x > y ? 1 : x < y ? -1 : 0) * VS.dir; });
-      var cols = [['n', 'Video'], ['views', 'Views'], ['viewers', 'Unique viewers'], ['w', 'Avg % watched'], ['fin', 'Finishes'], ['mins', 'Time watched']];
+      var cols = [['n', 'Lecture'], ['views', 'Views'], ['viewers', 'Students'], ['w', 'Avg watched'], ['fin', 'Finished'], ['mins', 'Watch time']];
       var th = cols.map(function (c) { return '<th data-vs="' + c[0] + '" class="' + (VS.sort === c[0] ? 'sorted ' + (VS.dir > 0 ? 'asc' : '') : '') + (c[0] !== 'n' && c[0] !== 'w' ? ' num' : '') + '">' + c[1] + '</th>'; }).join('');
       var rows = list.map(function (r) {
         var low = r.w < VS.bar;
@@ -339,17 +343,17 @@
           '<td class="num">' + r.views + '</td><td class="num">' + r.viewers + ' <span class="muted">/ 48</span></td><td style="width:230px"><div class="cbar2"><div class="t"><i class="' + (low ? 'warn' : 'ok') + '" style="width:' + r.w + '%"></i><s style="left:' + VS.bar + '%"></s></div><b>' + r.w + '%</b></div></td><td class="num">' + r.fin + '</td><td class="num">' + Math.floor(r.mins / 60) + 'h ' + (r.mins % 60) + 'm</td></tr>';
         if (VS.open === r.id) {
           var skipTxt = r.skip ? mmss(r.skip[0] * r.len / 24) + ' – ' + mmss((r.skip[1] + 1) * r.len / 24) : 'Nothing skipped by most viewers';
-          row += '<tr class="exp"><td colspan="6"><div class="in"><div><div class="row between small" style="margin-bottom:8px"><b style="color:var(--ink)">Retention</b><span class="muted">% of viewers still watching · amber = skipped by most</span></div>' + retSvg(r) +
+          row += '<tr class="exp"><td colspan="6"><div class="in"><div><div class="row between small" style="margin-bottom:8px"><b style="color:var(--ink)">Retention</b><span class="muted">Skipped part in amber</span></div>' + retSvg(r) +
             '<div class="row between small muted mono" style="margin-top:4px"><span>0:00</span><span>' + mmss(r.len / 2) + '</span><span>' + mmss(r.len) + '</span></div></div>' +
-            '<div class="stack" style="gap:10px"><div class="kpi2" style="padding:12px 14px"><div class="l">Most skipped</div><div style="font-weight:700;color:' + (r.skip ? '#9A6200' : 'var(--ok)') + ';margin-top:6px" class="mono">' + skipTxt + '</div></div>' +
+            '<div class="stack" style="gap:10px"><div class="kpi2" style="padding:12px 14px"><div class="l">Skipped most</div><div style="font-weight:700;color:' + (r.skip ? '#9A6200' : 'var(--ok)') + ';margin-top:6px" class="mono">' + skipTxt + '</div></div>' +
             '<div class="kpi2" style="padding:12px 14px"><div class="l">Haven\'t watched</div><div class="n" style="font-size:22px;margin-top:6px">' + (48 - r.viewers) + '</div></div>' +
-            '<a class="btn btn-primary" href="15-recording-detail.html" style="justify-content:center">Full details ' + IC.arrow + '</a><a class="btn btn-ghost" data-toast="Reminder sent to ' + (48 - r.viewers) + ' students" style="justify-content:center">' + IC.mail + ' Remind non-viewers</a></div></div></td></tr>';
+            '<a class="btn btn-primary" href="15-recording-detail.html" style="justify-content:center">Full details ' + IC.arrow + '</a><a class="btn btn-ghost" data-toast="Reminder sent to ' + (48 - r.viewers) + ' students" style="justify-content:center">' + IC.mail + ' Remind the rest</a></div></div></td></tr>';
         }
         return row;
       }).join('');
       var below = RECS.filter(function (r) { return r.w < VS.bar; }).length;
-      $('#vtable').innerHTML = '<div class="panel" style="overflow:hidden"><div class="panel-h" style="padding-bottom:14px"><div><h3>Top videos</h3><div class="small muted">Click a video for its retention curve · <b style="color:#9A6200">' + below + ' below the bar</b></div></div>' +
-        '<div class="slider">Coverage bar <input type="range" min="40" max="95" step="5" value="' + VS.bar + '" id="bar"><b>' + VS.bar + '%</b></div></div><table class="dt"><tr>' + th + '</tr>' + rows + '</table></div>';
+      $('#vtable').innerHTML = '<div class="panel" style="overflow:hidden"><div class="panel-h" style="padding-bottom:14px"><div><h3>Lectures</h3><div class="small muted"><b style="color:#9A6200">' + below + ' below target</b> · click one for details</div></div>' +
+        '<div class="slider">Target <input type="range" min="40" max="95" step="5" value="' + VS.bar + '" id="bar"><b>' + VS.bar + '%</b></div></div><table class="dt"><tr>' + th + '</tr>' + rows + '</table></div>';
       $('#bar').addEventListener('input', function (e) { VS.bar = +e.target.value; renderTable(); $('#bar').focus(); });
     }
     function renderSide() {
@@ -364,8 +368,8 @@
       $('#vside').innerHTML = '<div class="vside">' +
         '<div class="panel"><div class="panel-h"><h3>Devices</h3></div><div class="panel-b"><div class="donut2"><svg viewBox="0 0 130 130" style="width:120px;height:120px">' + arcs + '</svg><div class="lg2">' + dev.map(function (d) { return '<button><i style="background:' + d[2] + '"></i>' + d[0] + '<b>' + d[1] + '%</b></button>'; }).join('') + '</div></div></div></div>' +
         '<div class="panel"><div class="panel-h"><h3>Where they watch</h3></div><div class="panel-b">' + src.map(function (s) { return '<div style="margin-bottom:11px"><div class="row between small" style="margin-bottom:5px"><span>' + s[0] + '</span><b style="color:var(--ink)">' + s[1] + '%</b></div><div class="cbar2"><div class="t"><i style="width:' + s[1] + '%"></i></div></div></div>'; }).join('') + '</div></div>' +
-        '<div class="panel"><div class="panel-h"><h3>Playback speed</h3><span class="small muted">Captions on · 23%</span></div><div class="panel-b"><div class="spd">' + spd.map(function (s) { return '<div data-tip="' + s[0] + ' · ' + s[1] + '% of watch time"><i style="height:' + (s[1] / 61 * 100) + '%"></i><b>' + s[1] + '%</b><span>' + s[0] + '</span></div>'; }).join('') + '</div></div></div>' +
-        '<div class="panel"><div class="panel-h"><h3>When students watch</h3><span class="small muted">Busiest: Sun &amp; Tue evenings</span></div><div class="panel-b">' + hm + '</div></div></div>';
+        '<div class="panel"><div class="panel-h"><h3>Playback speed</h3><span class="small muted">Captions 23%</span></div><div class="panel-b"><div class="spd">' + spd.map(function (s) { return '<div data-tip="' + s[0] + ' · ' + s[1] + '% of watch time"><i style="height:' + (s[1] / 61 * 100) + '%"></i><b>' + s[1] + '%</b><span>' + s[0] + '</span></div>'; }).join('') + '</div></div></div>' +
+        '<div class="panel"><div class="panel-h"><h3>When students watch</h3><span class="small muted">Peak: Sun &amp; Tue evenings</span></div><div class="panel-b">' + hm + '</div></div></div>';
     }
     var STU = NAMES.slice(0, 48).map(function (n, k) {
       var g = 'ABC'[k % 3], v = RECS.map(function (r) { var p = rnd() < r.viewers / 48 ? Math.min(100, Math.round(r.w + (rnd() - .4) * 60)) : 0; return Math.max(0, p); });
@@ -382,7 +386,7 @@
         .sort(function (a, b) { return VS.hsort === 'low' ? a.avg - b.avg : VS.hsort === 'high' ? b.avg - a.avg : a.n.localeCompare(b.n); });
       var L = all.slice(0, VS.hshow), nBehind = STU.filter(function (s) { return (VS.group === 'all' || s.g === VS.group) && s.avg < 50; }).length;
       var st = function (a) { return a >= 75 ? '<span class="badge ok">On track</span>' : a >= 50 ? '<span class="badge warn">Falling behind</span>' : a > 15 ? '<span class="badge red">Behind</span>' : '<span class="badge red" style="background:#FDE8E8">Barely started</span>'; };
-      var h = '<div class="panel" style="overflow:hidden"><div class="panel-h" style="padding-bottom:14px"><div><h3>Who watched what</h3><div class="small muted">Each ring is one lecture · hover for the exact %</div></div>' +
+      var h = '<div class="panel" style="overflow:hidden"><div class="panel-h" style="padding-bottom:14px"><div><h3>Who watched what</h3><div class="small muted">Hover a ring for the %</div></div>' +
         '<div class="tools"><label class="sbox">' + IC.search + '<input id="hq" placeholder="Find a student" value="' + esc(VS.hq) + '"></label>' +
         '<div class="seg2">' + [['all', 'All'], ['A', 'A'], ['B', 'B'], ['C', 'C']].map(function (g) { return '<button data-g2="' + g[0] + '" class="' + (VS.group === g[0] ? 'on' : '') + '">' + (g[0] === 'all' ? 'All groups' : 'Group ' + g[1]) + '</button>'; }).join('') + '</div>' +
         '<button class="chip' + (VS.behind ? ' on' : '') + '" data-behind style="cursor:pointer;border:1px solid var(--line)">Behind · ' + nBehind + '</button>' +
@@ -407,8 +411,8 @@
     });
     function renderNT() {
       var nt = [['nt1', 'Lab safety briefing', 'Week 1 · url', '883412'], ['nt2', 'Guest talk — Siemens Energy', 'Week 5 · page', '883977']];
-      $('#vnt').innerHTML = '<div class="panel"><div class="panel-h"><div><h3>Not tracked yet</h3><div class="small muted">Vimeo links that play, but nobody\'s watching is measured</div></div><span class="row small" style="gap:8px;padding:6px 12px;border-radius:99px;background:var(--info-50)"><b style="color:var(--info)">SARAH</b> 6 recordings indexed · 1 without captions</span></div><div class="panel-b">' +
-        nt.map(function (r) { var on = VS.tracked[r[0]]; return '<div class="who2"><span class="tico fl" style="width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--info-50);color:var(--info)">' + IC.link + '</span><div style="flex:1"><b>' + r[1] + '</b><div class="small muted">' + r[2] + ' · <span class="mono">Vimeo ' + r[3] + '</span></div></div>' + (on ? '<span class="badge ok">✓ Tracking from now</span>' : '<a class="btn btn-sm btn-ghost" data-nt="' + r[0] + '">Convert to tracked</a>') + '</div>'; }).join('') + '</div></div>';
+      $('#vnt').innerHTML = '<div class="panel"><div class="panel-h"><div><h3>Not tracked yet</h3><div class="small muted">Videos with no watch data</div></div><span class="row small" style="gap:8px;padding:6px 12px;border-radius:99px;background:var(--info-50)"><b style="color:var(--info)">SARAH</b> 6 indexed · 1 no captions</span></div><div class="panel-b">' +
+        nt.map(function (r) { var on = VS.tracked[r[0]]; return '<div class="who2"><span class="tico fl" style="width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--info-50);color:var(--info)">' + IC.link + '</span><div style="flex:1"><b>' + r[1] + '</b><div class="small muted">' + r[2] + '</div></div>' + (on ? '<span class="badge ok">✓ Tracked</span>' : '<a class="btn btn-sm btn-ghost" data-nt="' + r[0] + '">Convert to tracked</a>') + '</div>'; }).join('') + '</div></div>';
     }
     root.addEventListener('click', function (e) {
       var m = e.target.closest('[data-m]'); if (m) { VS.metric = m.getAttribute('data-m'); renderTop(); return; }
@@ -417,7 +421,7 @@
       var t = e.target.closest('[data-toast]'); if (t) { toast(t.getAttribute('data-toast')); return; }
       var row = e.target.closest('tr[data-rec]'); if (row && !e.target.closest('a')) { var id = row.getAttribute('data-rec'); VS.open = VS.open === id ? null : id; renderTable(); return; }
       var g = e.target.closest('[data-g2]'); if (g) { VS.group = g.getAttribute('data-g2'); renderHeat(); return; }
-      var n = e.target.closest('[data-nt]'); if (n) { VS.tracked[n.getAttribute('data-nt')] = 1; renderNT(); toast('Converted — D-Learning will measure this video from now on'); }
+      var n = e.target.closest('[data-nt]'); if (n) { VS.tracked[n.getAttribute('data-nt')] = 1; renderNT(); toast('Tracking turned on'); }
     });
     VS.open = 'L9';
     renderTop(); renderTable(); renderSide(); renderHeat(); renderNT();
